@@ -48,9 +48,9 @@ test_%: $(TESTOBJ) create_bin_dirs $(OBJLIST)
 	$(eval TEST_MODULE = $(shell find $(TESTDIR) -name "$@.c"))
 
 	@echo "$(TEST_MODULE) -> $@"
-	@$(CC) $(CLFAGS) -c "$(TEST_MODULE)" -o "$@.o"
+	@$(CC) $(CLFAGS) -c "$(TEST_MODULE)" -o "$(BINDIR)/$@.o"
 
-	@$(CC) $(CLFAGS) $(OBJLIST) $(TESTOBJ) "$@.o" -o "$(BINDIR)/$@"
+	@$(CC) $(CLFAGS) $(OBJLIST) $(TESTOBJ) "$(BINDIR)/$@.o" -o "$(BINDIR)/$@"
 
 	@./$(BINDIR)/$@
 
