@@ -1,0 +1,46 @@
+---
+Language: Cpp
+BasedOnStyle: Mozilla
+AlignAfterOpenBracket: BlockIndent
+AlignArrayOfStructures: Left
+AlignConsecutiveMacros: AcrossComments
+AlignEscapedNewlines: Right
+AlignOperands: AlignAfterOperator
+AlignTrailingComments: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: Empty
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterReturnType: All
+BreakBeforeTernaryOperators: true
+BreakStringLiterals: true
+ColumnLimit: 120
+IncludeBlocks: Regroup
+IncludeCategories:
+  - Regex: "^<[^>]+>$"
+    Priority: 1
+    SortPriority: 1
+  - Regex: '^"[^"]+"$'
+    Priority: 2
+    SortPriority: 2
+IndentCaseBlocks: true
+IndentCaseLabels: false
+IndentGotoLabels: false
+IndentPPDirectives: AfterHash
+IndentWidth: 2
+MaxEmptyLinesToKeep: 2
+PointerAlignment: Left
+ReflowComments: true
+SeparateDefinitionBlocks: Always
+SortIncludes: CaseSensitive
+SpaceAfterCStyleCast: true
+SpaceAfterLogicalNot: true
+SpaceBeforeParens: ControlStatements
+SpacesBeforeTrailingComments: 2
+TabWidth: 2
+UseTab: Never
+---
