@@ -1,0 +1,5 @@
+bitfield Reg[4]
+
+register r0[32] = Reg{0}
+register r1[32] = Reg{1}
+register r2[32] = Reg{2}
