@@ -12,6 +12,7 @@ main(void)
 
   RUN_TEST(test_module_init);
   RUN_TEST(test_module_init_with_filepath_bigger_than_maximum_expects_to_truncate);
+  RUN_TEST(test_module_add_token);
 
   return UNITY_END();
 }
