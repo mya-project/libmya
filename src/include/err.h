@@ -1,5 +1,8 @@
 #pragma once
 
+/**
+ * Enumeration of error codes.
+ */
 typedef enum error_code
 {
   ERR_OK = 0,
