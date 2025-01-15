@@ -1,3 +1,4 @@
+#include "cqueue.c"
 #include "module.c"
 #include "token.c"
 #include "unity.h"
@@ -13,6 +14,9 @@ main(void)
   RUN_TEST(test_module_init);
   RUN_TEST(test_module_init_with_filepath_bigger_than_maximum_expects_to_truncate);
   RUN_TEST(test_module_add_token);
+  RUN_TEST(test_module_getc);
+  RUN_TEST(test_module_lookup);
+  RUN_TEST(test_module_close);
 
   RUN_TEST(test_cqueue_init);
   RUN_TEST(test_cqueue_add);
