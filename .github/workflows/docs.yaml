@@ -27,8 +27,8 @@ jobs:
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Install doxygen
-        run: apt install -y doxygen
+      - name: Install Doxygen
+        uses: ssciwr/doxygen-install@v1
 
       - name: Build documentation
         run: doxygen
