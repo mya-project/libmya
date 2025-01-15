@@ -4,8 +4,9 @@
 
 #include "types/token.h"
 
-#define MODULE_MAX_FILEPATH_SIZE     127
-#define MODULE_INITIAL_TOKENS_LENGTH 100
+#define MODULE_MAX_FILEPATH_SIZE       127
+#define MODULE_INITIAL_TOKENS_LENGTH   100
+#define MODULE_TOKENS_LENGTH_INCREMENT 50
 
 /**
  * Struct that represents a Mya module.

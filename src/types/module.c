@@ -2,6 +2,7 @@
 #include <string.h>
 
 #include "module.h"
+#include "types/token.h"
 
 error_code_t
 module_init(module_t* module, const char* filepath)
@@ -20,4 +21,15 @@ module_init(module_t* module, const char* filepath)
   module->_tokens_length = MODULE_INITIAL_TOKENS_LENGTH;
 
   return ERR_OK;
+}
+
+token_t*
+module_add_token(module_t* module)
+{
+  if (module->_tokens_length >= module->tokens_count) {
+    module->_tokens_length += MODULE_TOKENS_LENGTH_INCREMENT;
+    module->tokens = realloc(module->tokens, sizeof(token_t) * module->_tokens_length);
+  }
+
+  return &module->tokens[module->tokens_count++];
 }
