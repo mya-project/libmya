@@ -20,7 +20,18 @@ test_cqueue_init(void)
 
   memset(queue.data, 0, sizeof(int) * 500);
 
-  free(queue.data);
+  cqueue_close(&queue);
+}
+
+void
+test_cqueue_close(void)
+{
+  cqueue_t queue;
+
+  cqueue_init(&queue, 5);
+  cqueue_close(&queue);
+
+  TEST_ASSERT_NULL(queue.data);
 }
 
 void
@@ -41,7 +52,7 @@ test_cqueue_add(void)
 
   TEST_ASSERT_EQUAL(ERR_MAX_SIZE_EXCEEDED, cqueue_add(&queue, 6));
 
-  free(queue.data);
+  cqueue_close(&queue);
 }
 
 void
@@ -68,7 +79,7 @@ test_cqueue_get(void)
   TEST_ASSERT_EQUAL(ERR_EMPTY, cqueue_get(&queue, &value));
   TEST_ASSERT_EQUAL(3, value);  // Expects to not change the value.
 
-  free(queue.data);
+  cqueue_close(&queue);
 }
 
 void
@@ -99,7 +110,7 @@ test_cqueue_lookup(void)
   TEST_ASSERT_EQUAL(ERR_OK, cqueue_get(&queue, &value));
   TEST_ASSERT_EQUAL(1, value);
 
-  free(queue.data);
+  cqueue_close(&queue);
 }
 
 void
@@ -134,6 +145,8 @@ test_cqueue_isfull(void)
 
   TEST_ASSERT_EQUAL(ERR_OK, cqueue_get(&queue, &value));
   TEST_ASSERT_FALSE(cqueue_isfull(&queue));
+
+  cqueue_close(&queue);
 }
 
 void
@@ -209,4 +222,37 @@ test_cqueue_circular_case(void)
   TEST_ASSERT_EQUAL(0, queue._last);
 
   TEST_ASSERT_TRUE(cqueue_isempty(&queue));
+
+  cqueue_close(&queue);
+}
+
+/////
+
+int
+main(void)
+{
+  UNITY_BEGIN();
+
+  RUN_TEST(test_cqueue_init);
+  RUN_TEST(test_cqueue_close);
+  RUN_TEST(test_cqueue_add);
+  RUN_TEST(test_cqueue_get);
+  RUN_TEST(test_cqueue_lookup);
+  RUN_TEST(test_cqueue_isempty);
+  RUN_TEST(test_cqueue_isfull);
+  RUN_TEST(test_cqueue_circular_case);
+
+  return UNITY_END();
+}
+
+void
+setUp(void)
+{
+  //
+}
+
+void
+tearDown(void)
+{
+  //
 }

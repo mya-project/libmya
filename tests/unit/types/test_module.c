@@ -24,6 +24,18 @@ test_module_init(void)
 }
 
 void
+test_module_close(void)
+{
+  module_t module;
+
+  TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_BASIC_MODULE));
+  module_close(&module);
+
+  TEST_ASSERT_NULL(module.file);
+  TEST_ASSERT_NULL(module._queue.data);
+}
+
+void
 test_module_init_with_filepath_bigger_than_maximum_expects_to_truncate(void)
 {
   module_t module;
@@ -93,14 +105,31 @@ test_module_lookup(void)
   module_close(&module);
 }
 
-void
-test_module_close(void)
+/////
+
+int
+main(void)
 {
-  module_t module;
+  UNITY_BEGIN();
 
-  TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_BASIC_MODULE));
-  module_close(&module);
+  RUN_TEST(test_module_init);
+  RUN_TEST(test_module_close);
+  RUN_TEST(test_module_init_with_filepath_bigger_than_maximum_expects_to_truncate);
+  RUN_TEST(test_module_add_token);
+  RUN_TEST(test_module_getc);
+  RUN_TEST(test_module_lookup);
 
-  TEST_ASSERT_NULL(module.file);
-  TEST_ASSERT_NULL(module._queue.data);
+  return UNITY_END();
+}
+
+void
+setUp(void)
+{
+  //
+}
+
+void
+tearDown(void)
+{
+  //
 }
