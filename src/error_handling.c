@@ -5,6 +5,7 @@
 #include "module.h"
 
 
+#define MIN(a, b)  (a < b ? a : b)
 #define LBUFF_SIZE 127
 
 
@@ -23,7 +24,7 @@ _error_remove_line(module_t* module);
 void
 error_module_ctx(module_t* module, unsigned int line, unsigned int column, unsigned int length, const char* message)
 {
-  unsigned int ctx_start_line = line - ERR_CTX_SIZE;
+  unsigned int ctx_start_line = MIN(line - ERR_CTX_SIZE, 0);
   unsigned int ctx_end_line = line + ERR_CTX_SIZE;
   unsigned int current_line = 0;
 
