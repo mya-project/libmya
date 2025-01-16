@@ -1,5 +1,6 @@
 #pragma once
 
+#include "types/err.h"
 #include "types/queue.h"
 
 /**

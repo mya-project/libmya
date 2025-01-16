@@ -1,5 +1,12 @@
 #pragma once
 
+#include "colors.h"
+
+#define ERR_CTX_SIZE      3
+#define ERR_CTX_LINE_WRAP 80
+
+#define ERR_PREFIX C_RED "Error" C_NORMAL ": "
+
 /**
  * Enumeration of error codes.
  */

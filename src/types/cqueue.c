@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
-#include "err.h"
 #include "queue.h"
+#include "types/err.h"
 
 #define MIN(a, b) (a < b ? a : b)
 #define MAX(a, b) (a > b ? a : b)

@@ -9,6 +9,7 @@ CLFAGS = -std=c11 \
 	-Werror \
 	-pedantic-errors \
 	-O2 \
+	-DTCOLORS \
 	-I "src/include"
 
 TESTDIR = tests

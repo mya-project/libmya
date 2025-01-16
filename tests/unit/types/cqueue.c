@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "err.h"
 #include "queue.h"
+#include "types/err.h"
 #include "unity.h"
 
 void

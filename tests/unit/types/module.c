@@ -1,8 +1,8 @@
 #include <string.h>
 
-#include "err.h"
 #include "module.h"
 #include "token.h"
+#include "types/err.h"
 #include "unity.h"
 #include "utils.h"
 
