@@ -45,6 +45,7 @@ _isbasedigit(unsigned int base, int ch);
 error_code_t
 mya_lexer(module_t* module)
 {
+  char message[128];
   int ch;
   unsigned int line = 1;
   unsigned int column = 1;
@@ -108,6 +109,15 @@ mya_lexer(module_t* module)
     case '&':
       MOD_ADD("&", TK_OPERATOR);
       break;
+    case ';':
+      MOD_ADD(";", TK_SEMICOLON);
+      break;
+    case ':':
+      MOD_ADD(":", TK_COLON);
+      break;
+    case ',':
+      MOD_ADD(",", TK_COMMA);
+      break;
     case '<':  // <<
       break;
     case '>':  // >>
@@ -128,6 +138,13 @@ mya_lexer(module_t* module)
       column += _mod_read_string(module, line, column) - 1;
       continue;
     default:
+      if (! isalnum(ch)) {
+        sprintf(message, "Character '%c' is unexpected here!\n", ch);
+
+        module_add_error(module, line, column, 1, message);
+        break;
+      }
+
       column += _mod_read_identifier(module, line, column) - 1;
       continue;
     }
@@ -248,7 +265,7 @@ _mod_read_string(module_t* module, unsigned int line, unsigned int column)
       module_add_error(module, line, column, 1, message);
 
       DPRINTF3("Added token `\"%s\"` at %s:%d:%d.\n", lexeme->data, module->filepath, line, column);
-      return lexeme->length + 2;
+      return lexeme->length + 1;
     };
   }
 
