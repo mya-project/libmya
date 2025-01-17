@@ -53,11 +53,13 @@ test_%: CLFAGS += -I "$(TESTDIR)/include"
 test_%: $(TESTOBJ) create_bin_dirs $(OBJLIST)
 	$(eval TEST_MODULE = $(shell find $(TESTDIR) -name "$@.c"))
 
+	@echo
 	@echo "$(TEST_MODULE) -> $@"
 	@$(CC) $(CLFAGS) -c "$(TEST_MODULE)" -o "$(BINBASEDIR)/$@.o"
 
 	@$(CC) $(CLFAGS) $(OBJLIST) $(TESTOBJ) "$(BINBASEDIR)/$@.o" -o "$(BINBASEDIR)/$@"
 
+	@echo "-----------------------"
 	@./$(BINBASEDIR)/$@
 
 $(TESTOBJ): CLFAGS += -I "$(TESTDIR)/include"
