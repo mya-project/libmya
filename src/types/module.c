@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "debug.h"
+#include "dstring.h"
+#include "error_handling.h"
 #include "module.h"
 #include "queue.h"
 #include "types/token.h"
@@ -25,6 +28,10 @@ module_init(module_t* module, const char* filepath)
   module->tokens_count = 0;
   module->_tokens_length = MODULE_INITIAL_TOKENS_LENGTH;
 
+  module->errors = malloc(sizeof(module_error_t) * MODULE_INITIAL_ERRORS_LENGTH);
+  module->errors_count = 0;
+  module->_errors_length = MODULE_INITIAL_ERRORS_LENGTH;
+
   cqueue_init(&module->_queue, MODULE_MAX_QUEUE_LENGTH);
 
   return ERR_OK;
@@ -33,7 +40,7 @@ module_init(module_t* module, const char* filepath)
 token_t*
 module_add_token(module_t* module)
 {
-  if (module->_tokens_length >= module->tokens_count) {
+  if (module->tokens_count >= module->_tokens_length) {
     module->_tokens_length += MODULE_TOKENS_LENGTH_INCREMENT;
     module->tokens = realloc(module->tokens, sizeof(token_t) * module->_tokens_length);
   }
@@ -63,7 +70,50 @@ module_close(module_t* module)
   fclose(module->file);
   module->file = NULL;
 
+  free(module->tokens);
+  module->tokens = NULL;
+
   cqueue_close(&module->_queue);
+
+  for (int i = 0; i < module->errors_count; i++) {
+    dstring_close(&module->errors[i].message);
+  }
+
+  free(module->errors);
+  module->errors = NULL;
+}
+
+void
+module_add_error(module_t* module, unsigned int line, unsigned int column, unsigned int length, const char* message)
+{
+  if (module->errors_count >= module->_errors_length) {
+    module->_errors_length += MODULE_ERRORS_LENGTH_INCREMENT;
+    module->errors = realloc(module->errors, sizeof(module_error_t) * module->_errors_length);
+  }
+
+  module_error_t* error = &module->errors[module->errors_count++];
+
+  error->line = line;
+  error->column = column;
+  error->length = length;
+
+  dstring_init(&error->message, 100);
+  dstring_copy(&error->message, message);
+
+  DPRINTF1("Error at %s:%d:%d -> %s\n", module->filepath, line, column, message);
+}
+
+void
+module_print_errors(module_t* module)
+{
+  module_error_t* error;
+
+  for (int i = 0; i < module->errors_count; i++) {
+    error = &module->errors[i];
+
+    error_module_ctx(module, error->line, error->column, error->length, error->message.data);
+    fputc('\n', stderr);
+  }
 }
 
 static inline void

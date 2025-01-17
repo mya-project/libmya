@@ -61,3 +61,24 @@ module_lookup(module_t* module, int* chret, unsigned int seek);
  */
 void
 module_close(module_t* module);
+
+/**
+ * Add error for the given module.
+ *
+ * @param module   The module where to add the error.
+ * @param line     The module's line where the error is.
+ * @param column   The line's column where the error starts.
+ * @param length   The length of the part where has an error in the line. It's starts on `column` and ends on
+ *                 `column + length`.
+ * @param message  The error message.
+ */
+void
+module_add_error(module_t* module, unsigned int line, unsigned int column, unsigned int length, const char* message);
+
+/**
+ * Print all errors on the module.
+ *
+ * @param module  The module to print all errors.
+ */
+void
+module_print_errors(module_t* module);
