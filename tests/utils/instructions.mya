@@ -1,0 +1,19 @@
+include "tests/utils/basic.mya"
+
+bitfield Opcode[8] {
+    imm[1]
+    op[4]
+    reg[3]
+}
+
+set INSTRUCTION_MAX_SIZE = 16;
+set INSTRUCTION_MIN_SIZE = 16;
+
+inst mov[16](arg1: register[32], arg2: immediate[8]) {
+    opcode = Opcode {
+        imm = 0b1,
+        op = 0x00,
+        reg = Reg{arg1},
+    },
+    Reg{arg2},
+}
