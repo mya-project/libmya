@@ -11,10 +11,14 @@
 #include "token.h"
 #include "types/err.h"
 #include "types/keywords.h"
+#include "types/operators.h"
 
 
 static inline void
 _mod_rm_line(module_t* module);
+
+static inline unsigned int
+_mod_read_operator(module_t* module, unsigned int line, unsigned int column);
 
 static inline unsigned int
 _mod_read_number(module_t* module, unsigned int line, unsigned int column);
@@ -27,6 +31,9 @@ _mod_read_identifier(module_t* module, unsigned int line, unsigned int column);
 
 static int
 _get_keyword(const char* lexeme);
+
+static int
+_get_operator(const char* lexeme);
 
 static int
 _char_escape(int ch);
@@ -85,30 +92,6 @@ mya_lexer(module_t* module)
     case ']':
       MOD_ADD("]", TK_CLOSE_BRACKET);
       break;
-    case '=':
-      MOD_ADD("=", TK_OPERATOR);
-      break;
-    case '+':
-      MOD_ADD("+", TK_OPERATOR);
-      break;
-    case '-':
-      MOD_ADD("-", TK_OPERATOR);
-      break;
-    case '*':
-      MOD_ADD("*", TK_OPERATOR);
-      break;
-    case '/':
-      MOD_ADD("/", TK_OPERATOR);
-      break;
-    case '~':
-      MOD_ADD("~", TK_OPERATOR);
-      break;
-    case '|':
-      MOD_ADD("|", TK_OPERATOR);
-      break;
-    case '&':
-      MOD_ADD("&", TK_OPERATOR);
-      break;
     case ';':
       MOD_ADD(";", TK_SEMICOLON);
       break;
@@ -118,10 +101,21 @@ mya_lexer(module_t* module)
     case ',':
       MOD_ADD(",", TK_COMMA);
       break;
-    case '<':  // <<
+    case '=':
+      MOD_ADD("=", TK_EQUAL);
       break;
-    case '>':  // >>
-      break;
+    case '+':
+    case '-':
+    case '*':
+    case '/':
+    case '~':
+    case '|':
+    case '&':
+    case '^':
+    case '<':
+    case '>':
+      column += _mod_read_operator(module, line, column) - 1;
+      continue;
     case '0':
     case '1':
     case '2':
@@ -164,6 +158,37 @@ _mod_rm_line(module_t* module)
   do {
     err = module_getc(module, &ch);
   } while (err == ERR_OK && ch != '\n' && ch != EOF);
+}
+
+static inline unsigned int
+_mod_read_operator(module_t* module, unsigned int line, unsigned int column)
+{
+  char message[128];
+  int ch;
+  dstring_t* lexeme;
+
+  token_t* token = module_add_token(module);
+  token_init(token, "", TK_OPERATOR, line, column);
+  lexeme = &token->lexeme;
+
+  module_lookup(module, &ch, 0);
+  while (ispunct(ch)) {
+    dstring_putchar(lexeme, ch);
+    module_getc(module, &ch);
+
+    module_lookup(module, &ch, 0);
+  }
+
+  int op = _get_operator(lexeme->data);
+  if (op < 0) {
+    sprintf(message, "Operator `%s` is invalid!", lexeme->data);
+
+    module_add_error(module, line, column, lexeme->length, message);
+  }
+
+  token->value = op;
+
+  return lexeme->length;
 }
 
 static inline unsigned int
@@ -302,8 +327,20 @@ _mod_read_identifier(module_t* module, unsigned int line, unsigned int column)
 static int
 _get_keyword(const char* lexeme)
 {
-  for (int i = 0; i < KEYWORKDS_NUMBER; i++) {
+  for (int i = 0; mya_keywords[i]; i++) {
     if (! strcmp(lexeme, mya_keywords[i])) {
+      return i;
+    }
+  }
+
+  return -1;
+}
+
+static int
+_get_operator(const char* lexeme)
+{
+  for (int i = 0; mya_operators[i]; i++) {
+    if (! strcmp(lexeme, mya_operators[i])) {
       return i;
     }
   }
