@@ -22,6 +22,7 @@ test_lexer_with_math_expression(void)
   TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_EXPRESSION));
   TEST_ASSERT_EQUAL(ERR_OK, mya_lexer(&module));
 
+  TEST_ASSERT_EQUAL(0, module.errors_count);
   TEST_ASSERT_EQUAL(32, module.tokens_count);
 
   _assert_token(module, TK_NUMBER, "1", 1, 1, 1);
@@ -67,6 +68,7 @@ test_lexer_with_basic_module(void)
   TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_BASIC_MODULE));
   TEST_ASSERT_EQUAL(ERR_OK, mya_lexer(&module));
 
+  TEST_ASSERT_EQUAL(0, module.errors_count);
   TEST_ASSERT_EQUAL(45, module.tokens_count);
 
   _assert_token(module, TK_KEYWORD, "bitfield", KEY_BITFIELD, 1, 1);
@@ -129,6 +131,7 @@ test_lexer_with_instructions_module(void)
   TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_INSTRUCTIONS_MODULE));
   TEST_ASSERT_EQUAL(ERR_OK, mya_lexer(&module));
 
+  TEST_ASSERT_EQUAL(0, module.errors_count);
   TEST_ASSERT_EQUAL(79, module.tokens_count);
 
   _assert_token(module, TK_KEYWORD, "include", KEY_INCLUDE, 1, 1);
