@@ -104,43 +104,29 @@ mya_lexer(module_t* module)
     case '=':
       MOD_ADD("=", TK_EQUAL);
       break;
-    case '+':
-    case '-':
-    case '*':
-    case '/':
-    case '~':
-    case '|':
-    case '&':
-    case '^':
-    case '<':
-    case '>':
-      column += _mod_read_operator(module, line, column) - 1;
-      continue;
-    case '0':
-    case '1':
-    case '2':
-    case '3':
-    case '4':
-    case '5':
-    case '6':
-    case '7':
-    case '8':
-    case '9':
-      column += _mod_read_number(module, line, column) - 1;
-      continue;
     case '"':
       column += _mod_read_string(module, line, column) - 1;
       continue;
     default:
-      if (! isalnum(ch)) {
-        sprintf(message, "Character '%c' is unexpected here!\n", ch);
-
-        module_add_error(module, line, column, 1, message);
-        break;
+      if (isdigit(ch)) {
+        column += _mod_read_number(module, line, column) - 1;
+        continue;
       }
 
-      column += _mod_read_identifier(module, line, column) - 1;
-      continue;
+      if (ispunct(ch)) {
+        column += _mod_read_operator(module, line, column) - 1;
+        continue;
+      }
+
+      if (isalnum(ch)) {
+        column += _mod_read_identifier(module, line, column) - 1;
+        continue;
+      }
+
+      sprintf(message, "Character '%c' is unexpected here!\n", ch);
+
+      module_add_error(module, line, column, 1, message);
+      break;
     }
 
     module_getc(module, &ch);
