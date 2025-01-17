@@ -33,6 +33,8 @@ test_module_close(void)
 
   TEST_ASSERT_NULL(module.file);
   TEST_ASSERT_NULL(module._queue.data);
+  TEST_ASSERT_NULL(module.tokens);
+  TEST_ASSERT_NULL(module.errors);
 }
 
 void
@@ -105,6 +107,25 @@ test_module_lookup(void)
   module_close(&module);
 }
 
+void
+test_module_add_error(void)
+{
+  module_t module;
+
+  TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_BASIC_MODULE));
+
+  for (int i = 0; i < 100; i++) {
+    module_add_error(&module, 1 + i, 2 + i, 3 + i, "AAA");
+
+    TEST_ASSERT_EQUAL(1 + i, module.errors[i].line);
+    TEST_ASSERT_EQUAL(2 + i, module.errors[i].column);
+    TEST_ASSERT_EQUAL(3 + i, module.errors[i].length);
+    TEST_ASSERT_EQUAL_STRING("AAA", module.errors[i].message.data);
+  }
+
+  module_close(&module);
+}
+
 /////
 
 int
@@ -118,6 +139,7 @@ main(void)
   RUN_TEST(test_module_add_token);
   RUN_TEST(test_module_getc);
   RUN_TEST(test_module_lookup);
+  RUN_TEST(test_module_add_error);
 
   return UNITY_END();
 }
