@@ -8,6 +8,7 @@ CLFAGS = -std=c11 \
 	-Wall \
 	-Werror \
 	-pedantic-errors \
+	-fPIC \
 	-O2 \
 	-DTCOLORS \
 	-I "src/include"
@@ -54,7 +55,7 @@ test_%: $(TESTOBJ) create_bin_dirs $(OBJLIST)
 	$(eval TEST_MODULE = $(shell find $(TESTDIR) -name "$@.c"))
 
 	@echo
-	@echo "$(TEST_MODULE) -> $@"
+	@echo "$(TEST_MODULE) -> $(BINBASEDIR)/$@"
 	@$(CC) $(CLFAGS) -c "$(TEST_MODULE)" -o "$(BINBASEDIR)/$@.o"
 
 	@$(CC) $(CLFAGS) $(OBJLIST) $(TESTOBJ) "$(BINBASEDIR)/$@.o" -o "$(BINBASEDIR)/$@"
