@@ -10,9 +10,10 @@ test_ast_node_init(void)
 
   token_init(&token, "+", TK_OPERATOR, 1, 2);
 
-  ast_node_init(&node, NULL, &token);
+  ast_node_init(&node, NULL, NT_EXPRESSION, &token);
 
   TEST_ASSERT_NULL(node.parent);
+  TEST_ASSERT_EQUAL(NT_EXPRESSION, node.type);
   TEST_ASSERT_EQUAL(&token, node.token);
   TEST_ASSERT_EQUAL(0, node.children_count);
   TEST_ASSERT_EQUAL(AST_INITIAL_CHILDREN_LENGTH, node._children_length);
@@ -30,14 +31,16 @@ test_ast_add_children(void)
   token_init(&root_token, "inst", TK_KEYWORD, 1, 1);
   token_init(&child_token, "mov", TK_IDENTIFIER, 1, 5);
 
-  ast_node_init(&root, NULL, &root_token);
+  ast_node_init(&root, NULL, NT_STATEMENT, &root_token);
 
   for (int i = 0; i < 300; i++) {
-    ast_add_children(&root, &child_token);
+    ast_add_children(&root, NT_IDENTIFIER, &child_token);
 
     TEST_ASSERT_EQUAL(i + 1, root.children_count);
     TEST_ASSERT_GREATER_OR_EQUAL(root.children_count, root._children_length);
+
     TEST_ASSERT_EQUAL(&root, root.children[i].parent);
+    TEST_ASSERT_EQUAL(NT_IDENTIFIER, root.children[i].type);
     TEST_ASSERT_EQUAL(&child_token, root.children[i].token);
   }
 
