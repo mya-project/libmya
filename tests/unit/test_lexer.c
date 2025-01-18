@@ -136,6 +136,7 @@ test_lexer_with_instructions_module(void)
 
   _assert_token(module, TK_KEYWORD, "include", KEY_INCLUDE, 1, 1);
   _assert_token(module, TK_STRING, "tests/utils/basic.mya", 0, 1, 9);
+  _assert_token(module, TK_SEMICOLON, ";", 0, 1, 32);
 
   _assert_token(module, TK_KEYWORD, "bitfield", KEY_BITFIELD, 3, 1);
   _assert_token(module, TK_IDENTIFIER, "Opcode", 0, 3, 10);
@@ -221,11 +222,10 @@ test_lexer_with_instructions_module(void)
   _assert_token(module, TK_CLOSE_BRACES, "}", 0, 17, 5);
   _assert_token(module, TK_COMMA, ",", 0, 17, 6);
 
-  _assert_token(module, TK_IDENTIFIER, "Reg", 0, 18, 5);
-  _assert_token(module, TK_OPEN_BRACES, "{", 0, 18, 8);
-  _assert_token(module, TK_IDENTIFIER, "arg2", 0, 18, 9);
-  _assert_token(module, TK_CLOSE_BRACES, "}", 0, 18, 13);
-  _assert_token(module, TK_COMMA, ",", 0, 18, 14);
+  _assert_token(module, TK_IDENTIFIER, "imm", 0, 18, 5);
+  _assert_token(module, TK_EQUAL, "=", 0, 18, 9);
+  _assert_token(module, TK_IDENTIFIER, "arg2", 0, 18, 11);
+  _assert_token(module, TK_COMMA, ",", 0, 18, 15);
 
   _assert_token(module, TK_CLOSE_BRACES, "}", 0, 19, 1);
 }

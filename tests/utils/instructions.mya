@@ -1,4 +1,4 @@
-include "tests/utils/basic.mya"
+include "tests/utils/basic.mya";
 
 bitfield Opcode[8] {
     imm[1]
@@ -15,5 +15,5 @@ inst mov[16](arg1: register[32], arg2: immediate[8]) {
         op = 0x00,
         reg = Reg{arg1},
     },
-    Reg{arg2},
+    imm = arg2,
 }
