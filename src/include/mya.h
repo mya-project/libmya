@@ -12,3 +12,11 @@
  */
 error_code_t
 mya_lexer(module_t* module);
+
+/**
+ * Make the syntactical analysis on the given module and construct the AST.
+ *
+ * @param module  The module for make the syntactical analysis.
+ */
+error_code_t
+mya_parser(module_t* module);
