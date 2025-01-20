@@ -1,0 +1,329 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "expression",
+      "token": {
+        "lexeme": "+",
+        "type": "operator",
+        "line": 1,
+        "column": 2,
+        "value": 6
+      },
+      "children": [
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "1",
+            "type": "number",
+            "line": 1,
+            "column": 1,
+            "value": 1
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "*",
+            "type": "operator",
+            "line": 1,
+            "column": 5,
+            "value": 3
+          },
+          "children": [
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "1",
+                "type": "number",
+                "line": 1,
+                "column": 3,
+                "value": 1
+              },
+              "children": []
+            },
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "-",
+                "type": "operator",
+                "line": 1,
+                "column": 22,
+                "value": 2
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "(",
+                    "type": "open_parentheses",
+                    "line": 1,
+                    "column": 7,
+                    "value": 0
+                  },
+                  "children": [
+                    {
+                      "type": "expression",
+                      "token": {
+                        "lexeme": "+",
+                        "type": "operator",
+                        "line": 1,
+                        "column": 12,
+                        "value": 6
+                      },
+                      "children": [
+                        {
+                          "type": "expression",
+                          "token": {
+                            "lexeme": "345",
+                            "type": "number",
+                            "line": 1,
+                            "column": 8,
+                            "value": 345
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "expression",
+                          "token": {
+                            "lexeme": "0xa1b2",
+                            "type": "number",
+                            "line": 1,
+                            "column": 14,
+                            "value": 41394
+                          },
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "+",
+                    "type": "operator",
+                    "line": 1,
+                    "column": 31,
+                    "value": 6
+                  },
+                  "children": [
+                    {
+                      "type": "expression",
+                      "token": {
+                        "lexeme": "0b1010",
+                        "type": "number",
+                        "line": 1,
+                        "column": 24,
+                        "value": 10
+                      },
+                      "children": []
+                    },
+                    {
+                      "type": "expression",
+                      "token": {
+                        "lexeme": "/",
+                        "type": "operator",
+                        "line": 1,
+                        "column": 37,
+                        "value": 1
+                      },
+                      "children": [
+                        {
+                          "type": "expression",
+                          "token": {
+                            "lexeme": "099",
+                            "type": "number",
+                            "line": 1,
+                            "column": 33,
+                            "value": 99
+                          },
+                          "children": []
+                        },
+                        {
+                          "type": "expression",
+                          "token": {
+                            "lexeme": "<<",
+                            "type": "operator",
+                            "line": 1,
+                            "column": 50,
+                            "value": 7
+                          },
+                          "children": [
+                            {
+                              "type": "expression",
+                              "token": {
+                                "lexeme": "(",
+                                "type": "open_parentheses",
+                                "line": 1,
+                                "column": 39,
+                                "value": 0
+                              },
+                              "children": [
+                                {
+                                  "type": "expression",
+                                  "token": {
+                                    "lexeme": "0o17",
+                                    "type": "number",
+                                    "line": 1,
+                                    "column": 42,
+                                    "value": 15
+                                  },
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "type": "expression",
+                              "token": {
+                                "lexeme": "|",
+                                "type": "operator",
+                                "line": 1,
+                                "column": 62,
+                                "value": 5
+                              },
+                              "children": [
+                                {
+                                  "type": "expression",
+                                  "token": {
+                                    "lexeme": "(",
+                                    "type": "open_parentheses",
+                                    "line": 1,
+                                    "column": 53,
+                                    "value": 0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "expression",
+                                      "token": {
+                                        "lexeme": ">>",
+                                        "type": "operator",
+                                        "line": 1,
+                                        "column": 56,
+                                        "value": 8
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "expression",
+                                          "token": {
+                                            "lexeme": "2",
+                                            "type": "number",
+                                            "line": 1,
+                                            "column": 54,
+                                            "value": 2
+                                          },
+                                          "children": []
+                                        },
+                                        {
+                                          "type": "expression",
+                                          "token": {
+                                            "lexeme": "1",
+                                            "type": "number",
+                                            "line": 1,
+                                            "column": 59,
+                                            "value": 1
+                                          },
+                                          "children": []
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "type": "expression",
+                                  "token": {
+                                    "lexeme": "^",
+                                    "type": "operator",
+                                    "line": 1,
+                                    "column": 73,
+                                    "value": 9
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "expression",
+                                      "token": {
+                                        "lexeme": "(",
+                                        "type": "open_parentheses",
+                                        "line": 1,
+                                        "column": 64,
+                                        "value": 0
+                                      },
+                                      "children": [
+                                        {
+                                          "type": "expression",
+                                          "token": {
+                                            "lexeme": "&",
+                                            "type": "operator",
+                                            "line": 1,
+                                            "column": 67,
+                                            "value": 0
+                                          },
+                                          "children": [
+                                            {
+                                              "type": "expression",
+                                              "token": {
+                                                "lexeme": "5",
+                                                "type": "number",
+                                                "line": 1,
+                                                "column": 65,
+                                                "value": 5
+                                              },
+                                              "children": []
+                                            },
+                                            {
+                                              "type": "expression",
+                                              "token": {
+                                                "lexeme": "~",
+                                                "type": "operator",
+                                                "line": 1,
+                                                "column": 69,
+                                                "value": 4
+                                              },
+                                              "children": [
+                                                {
+                                                  "type": "expression",
+                                                  "token": {
+                                                    "lexeme": "1",
+                                                    "type": "number",
+                                                    "line": 1,
+                                                    "column": 70,
+                                                    "value": 1
+                                                  },
+                                                  "children": []
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "type": "expression",
+                                      "token": {
+                                        "lexeme": "9",
+                                        "type": "number",
+                                        "line": 1,
+                                        "column": 75,
+                                        "value": 9
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
