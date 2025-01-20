@@ -59,6 +59,7 @@ const char* mya_node_types[] = {
   // clang-format hates me.
   [NT_BITFIELD_BODY] = "bitfield_body",
   [NT_EXPRESSION] = "expression",
+  [NT_FIELD] = "field",
   [NT_IDENTIFIER] = "identifier",
   [NT_INST_BODY] = "inst_body",
   [NT_ROOT] = "root",

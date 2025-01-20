@@ -24,6 +24,8 @@ parse_statement(module_t* module, ast_node_t* parent, token_t* token)
     return parse_statement_include(module, parent, token);
   case KEY_SET:
     return parse_statement_set(module, parent, token);
+  case KEY_BITFIELD:
+    return parse_statement_bitfield(module, parent, token);
   default:
     return 1;
   }

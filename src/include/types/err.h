@@ -15,6 +15,7 @@ typedef enum error_code
   ERR_OK = 0,
   ERR_EMPTY,
   ERR_FILE_NOT_FOUND,
+  ERR_INVALID_CODE,
   ERR_INVALID_INDEX,
   ERR_MAX_SIZE_EXCEEDED,
 } error_code_t;

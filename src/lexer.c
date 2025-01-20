@@ -134,7 +134,7 @@ mya_lexer(module_t* module)
 
   MOD_ADD(":EOF:", TK_EOF);
 
-  return ERR_OK;
+  return (module->errors_count == 0) ? ERR_OK : ERR_INVALID_CODE;
 }
 
 static inline void

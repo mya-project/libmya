@@ -57,6 +57,8 @@ parse_expression(module_t* module, ast_node_t* parent, token_t* token)
     case TK_SEMICOLON:
       ntokens++;
     case TK_CLOSE_PARENS:
+    case TK_CLOSE_BRACES:
+    case TK_CLOSE_BRACKET:
     case TK_COMMA:
     case TK_EOF:
       goto finish_expression;

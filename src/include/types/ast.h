@@ -10,6 +10,7 @@ typedef enum node_type
   NT_ARG_LIST,
   NT_BITFIELD_BODY,
   NT_EXPRESSION,
+  NT_FIELD,
   NT_IDENTIFIER,
   NT_INST_BODY,
   NT_ROOT,

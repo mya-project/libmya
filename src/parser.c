@@ -10,17 +10,29 @@ mya_parser(module_t* module)
 {
   token_t* token;
 
-  for (unsigned int tk_index = 0; tk_index < module->tokens_count; tk_index++) {
+  for (unsigned int tk_index = 0; tk_index < module->tokens_count;) {
     token = &module->tokens[tk_index];
 
     switch (token->type) {
     case TK_KEYWORD:
-      tk_index += parse_statement(module, &module->ast, token) - 1;
+      tk_index += parse_statement(module, &module->ast, token);
       break;
+    case TK_EOF:
+      goto finish;
     default:
-      return ERR_EMPTY;
+      module_add_error(
+        module,
+        token->line,
+        token->column,
+        token->lexeme.length,
+        "Unexpected token here. It's expected to be a valid statement keyword."
+      );
+
+      tk_index++;
+      break;
     }
   }
 
-  return ERR_OK;
+finish:
+  return (module->errors_count == 0) ? ERR_OK : ERR_INVALID_CODE;
 }
