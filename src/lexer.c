@@ -132,6 +132,8 @@ mya_lexer(module_t* module)
     module_getc(module, &ch);
   }
 
+  MOD_ADD(":EOF:", TK_EOF);
+
   return ERR_OK;
 }
 

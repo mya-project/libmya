@@ -2,6 +2,7 @@
 
 #include <stdio.h>
 
+#include "types/ast.h"
 #include "types/dstring.h"
 #include "types/queue.h"
 #include "types/token.h"
@@ -33,6 +34,7 @@ typedef struct module
 {
   FILE* file;                                   ///< Module's file handler.
   token_t* tokens;                              ///< List of tokens inside the module.
+  ast_node_t ast;                               ///< AST of the module.
   module_error_t* errors;                       ///< List of errors inside the module.
   unsigned int tokens_count;                    ///< Number of tokens on `tokens` list.
   unsigned int _tokens_length;                  ///< Internal field with the size of `tokens` allocated memory.

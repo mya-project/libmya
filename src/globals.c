@@ -40,6 +40,7 @@ const char* mya_token_types[] = {
   [TK_CLOSE_PARENS] = "close_parentheses",
   [TK_COLON] = "colon",
   [TK_COMMA] = "comma",
+  [TK_EOF] = "end_of_file",
   [TK_EQUAL] = "equal",
   [TK_IDENTIFIER] = "identifier",
   [TK_KEYWORD] = "keyword",

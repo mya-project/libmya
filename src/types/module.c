@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "ast.h"
 #include "debug.h"
 #include "dstring.h"
 #include "error_handling.h"
@@ -23,6 +24,8 @@ module_init(module_t* module, const char* filepath)
 
   strncpy(module->filepath, filepath, MODULE_MAX_FILEPATH_SIZE);
   module->filepath[MODULE_MAX_FILEPATH_SIZE] = '\0';
+
+  ast_node_init(&module->ast, NULL, NT_ROOT, NULL);
 
   module->tokens = malloc(sizeof(token_t) * MODULE_INITIAL_TOKENS_LENGTH);
   module->tokens_count = 0;
@@ -81,6 +84,8 @@ module_close(module_t* module)
 
   free(module->errors);
   module->errors = NULL;
+
+  ast_close(&module->ast);
 }
 
 void

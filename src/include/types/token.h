@@ -12,6 +12,7 @@ typedef enum token_type
   TK_CLOSE_PARENS,
   TK_COLON,
   TK_COMMA,
+  TK_EOF,
   TK_EQUAL,
   TK_IDENTIFIER,
   TK_KEYWORD,
