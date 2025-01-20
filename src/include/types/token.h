@@ -35,3 +35,5 @@ typedef struct token
   long long int value;  ///< Integer value of the token on TK_NUMBER tokens.
   dstring_t lexeme;     ///< Lexeme of the token.
 } token_t;
+
+extern const char* mya_token_types[];

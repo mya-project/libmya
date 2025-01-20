@@ -28,3 +28,5 @@ typedef struct ast_node
   unsigned int children_count;
   unsigned int _children_length;
 } ast_node_t;
+
+extern const char* mya_node_types[];

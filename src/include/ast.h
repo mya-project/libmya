@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdio.h>
+
 #include "types/ast.h"
 
 /**
@@ -54,3 +56,12 @@ ast_insert_children(ast_node_t* parent, ast_node_t* child);
  */
 void
 ast_copy(ast_node_t* destiny, ast_node_t* source);
+
+/**
+ * Reads the AST and converts it to JSON, writting on the given file stream.
+ *
+ * @param root  The root of the AST.
+ * @param file  The file where to write the JSON.
+ */
+void
+ast_to_json(ast_node_t* root, FILE* file);
