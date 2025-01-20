@@ -1,6 +1,10 @@
 #include <stdlib.h>
+#include <string.h>
 
 #include "ast.h"
+
+static void
+_ast_ensure_children_size(ast_node_t* node);
 
 void
 ast_node_init(ast_node_t* node, ast_node_t* parent, node_type_t type, token_t* token)
@@ -26,15 +30,42 @@ ast_close(ast_node_t* root)
 }
 
 ast_node_t*
-ast_add_children(ast_node_t* node, node_type_t type, token_t* token)
+ast_add_children(ast_node_t* parent, node_type_t type, token_t* token)
 {
-  if (node->children_count >= node->_children_length) {
-    node->_children_length += AST_CHILDREN_LENGTH_INCREMENT;
-    node->children = realloc(node->children, sizeof(ast_node_t) * node->_children_length);
-  }
+  _ast_ensure_children_size(parent);
 
-  ast_node_t* child = &node->children[node->children_count++];
-  ast_node_init(child, node, type, token);
+  ast_node_t* child = &parent->children[parent->children_count++];
+  ast_node_init(child, parent, type, token);
 
   return child;
+}
+
+ast_node_t*
+ast_insert_children(ast_node_t* parent, ast_node_t* child)
+{
+  _ast_ensure_children_size(parent);
+
+  ast_node_t* new_child = &parent->children[parent->children_count++];
+
+  ast_copy(new_child, child);
+  new_child->parent = parent;
+
+  return new_child;
+}
+
+void
+ast_copy(ast_node_t* destiny, ast_node_t* source)
+{
+  memcpy(destiny, source, sizeof(ast_node_t));
+}
+
+static void
+_ast_ensure_children_size(ast_node_t* node)
+{
+  if (node->children_count < node->_children_length) {
+    return;
+  }
+
+  node->_children_length += AST_CHILDREN_LENGTH_INCREMENT;
+  node->children = realloc(node->children, sizeof(ast_node_t) * node->_children_length);
 }

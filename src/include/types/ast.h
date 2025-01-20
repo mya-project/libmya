@@ -8,14 +8,15 @@
 typedef enum node_type
 {
   NT_ARG_LIST,
+  NT_BITFIELD_BODY,
   NT_EXPRESSION,
   NT_IDENTIFIER,
   NT_INST_BODY,
+  NT_ROOT,
   NT_SIZE_SPEC,
   NT_STATEMENT,
-  NT_TYPE,
   NT_STRING,
-  NT_BITFIELD_BODY,
+  NT_TYPE,
 } node_type_t;
 
 typedef struct ast_node
