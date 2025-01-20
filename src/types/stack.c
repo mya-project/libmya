@@ -1,38 +1,56 @@
 #include <stdlib.h>
 
+#include "ast.h"
 #include "stack.h"
 #include "types/err.h"
+
+void
+_stack_ensure_size(stack_t* stack);
 
 void
 stack_init(stack_t* stack)
 {
   stack->length = 0;
 
-  stack->values = malloc(sizeof(void*) * STACK_INITIAL_LENGTH);
+  stack->values = malloc(sizeof(ast_node_t) * STACK_INITIAL_LENGTH);
   stack->_size = STACK_INITIAL_LENGTH;
 }
 
-unsigned int
-stack_push(stack_t* stack, void* value)
+void
+stack_close(stack_t* stack)
 {
-  if (stack->length >= stack->_size) {
-    stack->_size += STACK_LENGTH_INCREMENT;
-    stack->values = realloc(stack->values, sizeof(void*) * stack->_size);
-  }
+  free(stack->values);
+  stack->values = NULL;
+}
 
-  stack->values[stack->length] = value;
+ast_node_t*
+stack_push(stack_t* stack, node_type_t type, token_t* token)
+{
+  _stack_ensure_size(stack);
 
-  return stack->length++;
+  ast_node_init(&stack->values[stack->length], NULL, type, token);
+
+  return &stack->values[stack->length++];
+}
+
+ast_node_t*
+stack_insert(stack_t* stack, ast_node_t* source)
+{
+  _stack_ensure_size(stack);
+
+  ast_copy(&stack->values[stack->length], source);
+
+  return &stack->values[stack->length++];
 }
 
 error_code_t
-stack_pop(stack_t* stack, void** value)
+stack_pop(stack_t* stack, ast_node_t* value)
 {
   if (stack_isempty(stack)) {
     return ERR_EMPTY;
   }
 
-  *value = stack->values[--stack->length];
+  ast_copy(value, &stack->values[--stack->length]);
 
   return ERR_OK;
 }
@@ -41,4 +59,15 @@ bool
 stack_isempty(stack_t* stack)
 {
   return stack->length == 0;
+}
+
+void
+_stack_ensure_size(stack_t* stack)
+{
+  if (stack->length < stack->_size) {
+    return;
+  }
+
+  stack->_size += STACK_LENGTH_INCREMENT;
+  stack->values = realloc(stack->values, sizeof(ast_node_t) * stack->_size);
 }
