@@ -43,6 +43,34 @@ test_parser_with_expression(void)
   module_close(&module);
 }
 
+void
+test_parser_with_basic_module(void)
+{
+  module_t module;
+  char tmpname[] = "/tmp/XXXXXX";
+
+  TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_BASIC_MODULE));
+  TEST_ASSERT_EQUAL(ERR_OK, mya_lexer(&module));
+
+  TEST_ASSERT_EQUAL(0, module.errors_count);
+  TEST_ASSERT_EQUAL(46, module.tokens_count);
+
+  TEST_ASSERT_EQUAL(ERR_OK, mya_parser(&module));
+  TEST_ASSERT_EQUAL(0, module.errors_count);
+
+  int fd = mkstemp(tmpname);
+  FILE* tmp = fdopen(fd, "w");
+  ast_to_json(&module.ast, tmp);
+
+  fclose(tmp);
+
+  _assert_files(tmpname, FILE_BASIC_MODULE ".json");
+
+  unlink(tmpname);
+
+  module_close(&module);
+}
+
 /////
 
 void
@@ -61,6 +89,7 @@ main(void)
   UNITY_BEGIN();
 
   RUN_TEST(test_parser_with_expression);
+  RUN_TEST(test_parser_with_basic_module);
 
   return UNITY_END();
 }

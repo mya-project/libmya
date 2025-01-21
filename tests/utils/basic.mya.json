@@ -1,0 +1,315 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "bitfield",
+        "type": "keyword",
+        "line": 1,
+        "column": 1,
+        "value": 0
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "Reg",
+            "type": "identifier",
+            "line": 1,
+            "column": 10,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "4",
+            "type": "number",
+            "line": 1,
+            "column": 14,
+            "value": 4
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "register",
+        "type": "keyword",
+        "line": 4,
+        "column": 1,
+        "value": 4
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "r0",
+            "type": "identifier",
+            "line": 4,
+            "column": 10,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "32",
+            "type": "number",
+            "line": 4,
+            "column": 13,
+            "value": 32
+          },
+          "children": []
+        },
+        {
+          "type": "bitfield_spec",
+          "token": {
+            "lexeme": "Reg",
+            "type": "identifier",
+            "line": 4,
+            "column": 19,
+            "value": 0
+          },
+          "children": [
+            {
+              "type": "field_spec",
+              "token": {
+                "lexeme": "{",
+                "type": "open_braces",
+                "line": 4,
+                "column": 22,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "0",
+                    "type": "number",
+                    "line": 4,
+                    "column": 23,
+                    "value": 0
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "register",
+        "type": "keyword",
+        "line": 5,
+        "column": 1,
+        "value": 4
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "r1",
+            "type": "identifier",
+            "line": 5,
+            "column": 10,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "32",
+            "type": "number",
+            "line": 5,
+            "column": 13,
+            "value": 32
+          },
+          "children": []
+        },
+        {
+          "type": "bitfield_spec",
+          "token": {
+            "lexeme": "Reg",
+            "type": "identifier",
+            "line": 5,
+            "column": 19,
+            "value": 0
+          },
+          "children": [
+            {
+              "type": "field_spec",
+              "token": {
+                "lexeme": "{",
+                "type": "open_braces",
+                "line": 5,
+                "column": 22,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "0x1",
+                    "type": "number",
+                    "line": 5,
+                    "column": 23,
+                    "value": 1
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "register",
+        "type": "keyword",
+        "line": 6,
+        "column": 1,
+        "value": 4
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "r2",
+            "type": "identifier",
+            "line": 6,
+            "column": 10,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "32",
+            "type": "number",
+            "line": 6,
+            "column": 13,
+            "value": 32
+          },
+          "children": []
+        },
+        {
+          "type": "bitfield_spec",
+          "token": {
+            "lexeme": "Reg",
+            "type": "identifier",
+            "line": 6,
+            "column": 19,
+            "value": 0
+          },
+          "children": [
+            {
+              "type": "field_spec",
+              "token": {
+                "lexeme": "{",
+                "type": "open_braces",
+                "line": 6,
+                "column": 22,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "0b10",
+                    "type": "number",
+                    "line": 6,
+                    "column": 23,
+                    "value": 2
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "register",
+        "type": "keyword",
+        "line": 7,
+        "column": 1,
+        "value": 4
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "r3",
+            "type": "identifier",
+            "line": 7,
+            "column": 10,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "32",
+            "type": "number",
+            "line": 7,
+            "column": 13,
+            "value": 32
+          },
+          "children": []
+        },
+        {
+          "type": "bitfield_spec",
+          "token": {
+            "lexeme": "Reg",
+            "type": "identifier",
+            "line": 7,
+            "column": 19,
+            "value": 0
+          },
+          "children": [
+            {
+              "type": "field_spec",
+              "token": {
+                "lexeme": "{",
+                "type": "open_braces",
+                "line": 7,
+                "column": 23,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "0o3",
+                    "type": "number",
+                    "line": 7,
+                    "column": 25,
+                    "value": 3
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
