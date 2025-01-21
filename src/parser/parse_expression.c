@@ -54,6 +54,9 @@ parse_expression(module_t* module, ast_node_t* parent, token_t* token)
     case TK_OPERATOR:
       ntokens += _parse_operator(module, parent, &stack, current_token);
       break;
+    case TK_EQUAL:
+      ntokens += _parse_binary_operator(module, parent, &stack, current_token);
+      break;
     case TK_SEMICOLON:
       ntokens++;
     case TK_CLOSE_PARENS:

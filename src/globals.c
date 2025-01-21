@@ -58,7 +58,9 @@ const char* mya_node_types[] = {
   [NT_ARG_LIST] = "argument_list",
   // clang-format hates me.
   [NT_BITFIELD_BODY] = "bitfield_body",
+  [NT_BITFIELD_SPEC] = "bitfield_spec",
   [NT_EXPRESSION] = "expression",
+  [NT_FIELD_SPEC] = "field_spec",
   [NT_FIELD] = "field",
   [NT_IDENTIFIER] = "identifier",
   [NT_INST_BODY] = "inst_body",
