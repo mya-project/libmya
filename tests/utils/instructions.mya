@@ -7,7 +7,7 @@ bitfield Opcode[8] {
 }
 
 set INSTRUCTION_MAX_SIZE = 16;
-set INSTRUCTION_MIN_SIZE = 16;
+set INSTRUCTION_MIN_SIZE = 15 + 1;
 
 inst mov[16](arg1: register[32], arg2: immediate[8]) {
     opcode = Opcode {

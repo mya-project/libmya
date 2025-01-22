@@ -1,0 +1,567 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "include",
+        "type": "keyword",
+        "line": 1,
+        "column": 1,
+        "value": 2
+      },
+      "children": [
+        {
+          "type": "string",
+          "token": {
+            "lexeme": "tests/utils/basic.mya",
+            "type": "string",
+            "line": 1,
+            "column": 9,
+            "value": 0
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "bitfield",
+        "type": "keyword",
+        "line": 3,
+        "column": 1,
+        "value": 0
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "Opcode",
+            "type": "identifier",
+            "line": 3,
+            "column": 10,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "8",
+            "type": "number",
+            "line": 3,
+            "column": 17,
+            "value": 8
+          },
+          "children": []
+        },
+        {
+          "type": "bitfield_body",
+          "token": {
+            "lexeme": "{",
+            "type": "open_braces",
+            "line": 3,
+            "column": 20,
+            "value": 0
+          },
+          "children": [
+            {
+              "type": "field",
+              "token": {
+                "lexeme": "imm",
+                "type": "identifier",
+                "line": 4,
+                "column": 5,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "1",
+                    "type": "number",
+                    "line": 4,
+                    "column": 9,
+                    "value": 1
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "field",
+              "token": {
+                "lexeme": "op",
+                "type": "identifier",
+                "line": 5,
+                "column": 5,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "4",
+                    "type": "number",
+                    "line": 5,
+                    "column": 8,
+                    "value": 4
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "field",
+              "token": {
+                "lexeme": "reg",
+                "type": "identifier",
+                "line": 6,
+                "column": 5,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "3",
+                    "type": "number",
+                    "line": 6,
+                    "column": 9,
+                    "value": 3
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "set",
+        "type": "keyword",
+        "line": 9,
+        "column": 1,
+        "value": 5
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "INSTRUCTION_MAX_SIZE",
+            "type": "identifier",
+            "line": 9,
+            "column": 5,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "16",
+            "type": "number",
+            "line": 9,
+            "column": 28,
+            "value": 16
+          },
+          "children": []
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "set",
+        "type": "keyword",
+        "line": 10,
+        "column": 1,
+        "value": 5
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "INSTRUCTION_MIN_SIZE",
+            "type": "identifier",
+            "line": 10,
+            "column": 5,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "+",
+            "type": "operator",
+            "line": 10,
+            "column": 31,
+            "value": 6
+          },
+          "children": [
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "15",
+                "type": "number",
+                "line": 10,
+                "column": 28,
+                "value": 15
+              },
+              "children": []
+            },
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "1",
+                "type": "number",
+                "line": 10,
+                "column": 33,
+                "value": 1
+              },
+              "children": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "statement",
+      "token": {
+        "lexeme": "inst",
+        "type": "keyword",
+        "line": 12,
+        "column": 1,
+        "value": 3
+      },
+      "children": [
+        {
+          "type": "identifier",
+          "token": {
+            "lexeme": "mov",
+            "type": "identifier",
+            "line": 12,
+            "column": 6,
+            "value": 0
+          },
+          "children": []
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "16",
+            "type": "number",
+            "line": 12,
+            "column": 10,
+            "value": 16
+          },
+          "children": []
+        },
+        {
+          "type": "argument_list",
+          "token": {
+            "lexeme": "(",
+            "type": "open_parentheses",
+            "line": 12,
+            "column": 13,
+            "value": 0
+          },
+          "children": [
+            {
+              "type": "argument",
+              "token": {
+                "lexeme": "arg1",
+                "type": "identifier",
+                "line": 12,
+                "column": 14,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "type_name",
+                  "token": {
+                    "lexeme": "register",
+                    "type": "keyword",
+                    "line": 12,
+                    "column": 20,
+                    "value": 4
+                  },
+                  "children": []
+                },
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "32",
+                    "type": "number",
+                    "line": 12,
+                    "column": 29,
+                    "value": 32
+                  },
+                  "children": []
+                }
+              ]
+            },
+            {
+              "type": "argument",
+              "token": {
+                "lexeme": "arg2",
+                "type": "identifier",
+                "line": 12,
+                "column": 34,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "type_name",
+                  "token": {
+                    "lexeme": "immediate",
+                    "type": "keyword",
+                    "line": 12,
+                    "column": 40,
+                    "value": 1
+                  },
+                  "children": []
+                },
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "8",
+                    "type": "number",
+                    "line": 12,
+                    "column": 50,
+                    "value": 8
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "field_spec",
+          "token": {
+            "lexeme": "{",
+            "type": "open_braces",
+            "line": 12,
+            "column": 54,
+            "value": 0
+          },
+          "children": [
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "=",
+                "type": "equal",
+                "line": 13,
+                "column": 12,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "opcode",
+                    "type": "identifier",
+                    "line": 13,
+                    "column": 5,
+                    "value": 0
+                  },
+                  "children": []
+                },
+                {
+                  "type": "bitfield_spec",
+                  "token": {
+                    "lexeme": "Opcode",
+                    "type": "identifier",
+                    "line": 13,
+                    "column": 14,
+                    "value": 0
+                  },
+                  "children": [
+                    {
+                      "type": "field_spec",
+                      "token": {
+                        "lexeme": "{",
+                        "type": "open_braces",
+                        "line": 13,
+                        "column": 21,
+                        "value": 0
+                      },
+                      "children": [
+                        {
+                          "type": "expression",
+                          "token": {
+                            "lexeme": "=",
+                            "type": "equal",
+                            "line": 14,
+                            "column": 13,
+                            "value": 0
+                          },
+                          "children": [
+                            {
+                              "type": "expression",
+                              "token": {
+                                "lexeme": "imm",
+                                "type": "identifier",
+                                "line": 14,
+                                "column": 9,
+                                "value": 0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "expression",
+                              "token": {
+                                "lexeme": "0b1",
+                                "type": "number",
+                                "line": 14,
+                                "column": 15,
+                                "value": 1
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "expression",
+                          "token": {
+                            "lexeme": "=",
+                            "type": "equal",
+                            "line": 15,
+                            "column": 12,
+                            "value": 0
+                          },
+                          "children": [
+                            {
+                              "type": "expression",
+                              "token": {
+                                "lexeme": "op",
+                                "type": "identifier",
+                                "line": 15,
+                                "column": 9,
+                                "value": 0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "expression",
+                              "token": {
+                                "lexeme": "0x00",
+                                "type": "number",
+                                "line": 15,
+                                "column": 14,
+                                "value": 0
+                              },
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "type": "expression",
+                          "token": {
+                            "lexeme": "=",
+                            "type": "equal",
+                            "line": 16,
+                            "column": 13,
+                            "value": 0
+                          },
+                          "children": [
+                            {
+                              "type": "expression",
+                              "token": {
+                                "lexeme": "reg",
+                                "type": "identifier",
+                                "line": 16,
+                                "column": 9,
+                                "value": 0
+                              },
+                              "children": []
+                            },
+                            {
+                              "type": "bitfield_spec",
+                              "token": {
+                                "lexeme": "Reg",
+                                "type": "identifier",
+                                "line": 16,
+                                "column": 15,
+                                "value": 0
+                              },
+                              "children": [
+                                {
+                                  "type": "field_spec",
+                                  "token": {
+                                    "lexeme": "{",
+                                    "type": "open_braces",
+                                    "line": 16,
+                                    "column": 18,
+                                    "value": 0
+                                  },
+                                  "children": [
+                                    {
+                                      "type": "expression",
+                                      "token": {
+                                        "lexeme": "arg1",
+                                        "type": "identifier",
+                                        "line": 16,
+                                        "column": 19,
+                                        "value": 0
+                                      },
+                                      "children": []
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "=",
+                "type": "equal",
+                "line": 18,
+                "column": 9,
+                "value": 0
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "imm",
+                    "type": "identifier",
+                    "line": 18,
+                    "column": 5,
+                    "value": 0
+                  },
+                  "children": []
+                },
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "arg2",
+                    "type": "identifier",
+                    "line": 18,
+                    "column": 11,
+                    "value": 0
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

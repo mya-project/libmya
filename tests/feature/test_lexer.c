@@ -136,7 +136,7 @@ test_lexer_with_instructions_module(void)
   TEST_ASSERT_EQUAL(ERR_OK, mya_lexer(&module));
 
   TEST_ASSERT_EQUAL(0, module.errors_count);
-  TEST_ASSERT_EQUAL(80, module.tokens_count);
+  TEST_ASSERT_EQUAL(82, module.tokens_count);
 
   _assert_token(module, TK_KEYWORD, "include", KEY_INCLUDE, 1, 1);
   _assert_token(module, TK_STRING, "tests/utils/basic.mya", 0, 1, 9);
@@ -175,8 +175,10 @@ test_lexer_with_instructions_module(void)
   _assert_token(module, TK_KEYWORD, "set", KEY_SET, 10, 1);
   _assert_token(module, TK_IDENTIFIER, "INSTRUCTION_MIN_SIZE", 0, 10, 5);
   _assert_token(module, TK_EQUAL, "=", 0, 10, 26);
-  _assert_token(module, TK_NUMBER, "16", 16, 10, 28);
-  _assert_token(module, TK_SEMICOLON, ";", 0, 10, 30);
+  _assert_token(module, TK_NUMBER, "15", 15, 10, 28);
+  _assert_token(module, TK_OPERATOR, "+", OP_PLUS, 10, 31);
+  _assert_token(module, TK_NUMBER, "1", 1, 10, 33);
+  _assert_token(module, TK_SEMICOLON, ";", 0, 10, 34);
 
   _assert_token(module, TK_KEYWORD, "inst", KEY_INST, 12, 1);
   _assert_token(module, TK_IDENTIFIER, "mov", 0, 12, 6);
