@@ -33,7 +33,20 @@ parse_statement_set(module_t* module, ast_node_t* parent, token_t* token)
   }
 
   ast_add_children(node_statement, NT_IDENTIFIER, tkid);
-  parse_expression(module, node_statement, tkexpr);
 
-  return 3;
+  unsigned int ntokens = 3 + parse_expression(module, node_statement, tkexpr);
+
+  token_t* tksemicolon = token + ntokens;
+
+  if (tksemicolon->type != TK_SEMICOLON) {
+    module_add_error(
+      module,
+      tksemicolon->line,
+      tksemicolon->column,
+      1,
+      "Expected semicolon at end of the set command. Example: set NUMBER = 1;"
+    );
+  }
+
+  return ntokens + 1;
 }
