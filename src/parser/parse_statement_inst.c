@@ -3,10 +3,10 @@
 #include "parser.h"
 #include "types/keywords.h"
 
-unsigned int
+static unsigned int
 _parse_inst_args(module_t* module, ast_node_t* parent, token_t* token);
 
-unsigned int
+static unsigned int
 _parse_arg_spec(module_t* module, ast_node_t* parent, token_t* token);
 
 unsigned int
