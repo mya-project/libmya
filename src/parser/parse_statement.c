@@ -28,6 +28,8 @@ parse_statement(module_t* module, ast_node_t* parent, token_t* token)
     return parse_statement_bitfield(module, parent, token);
   case KEY_REGISTER:
     return parse_statement_register(module, parent, token);
+  case KEY_INST:
+    return parse_statement_inst(module, parent, token);
   default:
     module_add_error(
       module,
