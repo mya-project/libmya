@@ -8,6 +8,7 @@
 typedef enum node_type
 {
   NT_ARG_LIST,
+  NT_ARG,
   NT_BITFIELD_BODY,
   NT_BITFIELD_SPEC,
   NT_EXPRESSION,

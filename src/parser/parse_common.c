@@ -26,7 +26,7 @@ parse_size_spec(module_t* module, ast_node_t* parent, token_t* token, const char
 
   unsigned int ntokens = parse_expression(module, parent, tkexpr);
 
-  token_t* tkclose_bracket = token + ntokens;
+  token_t* tkclose_bracket = token + ntokens + 1;
 
   if (tkclose_bracket->type != TK_CLOSE_BRACKET) {
     snprintf(message, sizeof message - 1, "Expected a close bracket here. Example: %s", example);
@@ -40,7 +40,7 @@ parse_size_spec(module_t* module, ast_node_t* parent, token_t* token, const char
     );
   }
 
-  return ntokens + 1;
+  return ntokens + 2;
 }
 
 unsigned int
@@ -82,7 +82,7 @@ parse_bitfield_spec(module_t* module, ast_node_t* parent, token_t* token)
 
   unsigned int ntokens = 1 + parse_fieldlist_spec(module, node_statement, tkopen_braces);
 
-  token_t* tkclose_braces = token + ntokens;
+  token_t* tkclose_braces = token + ntokens - 1;
   if (tkclose_braces->type != TK_CLOSE_BRACES) {
     module_add_error(
       module,
@@ -99,7 +99,7 @@ parse_bitfield_spec(module_t* module, ast_node_t* parent, token_t* token)
     );
   }
 
-  return ntokens + 1;
+  return ntokens;
 }
 
 unsigned int
@@ -110,8 +110,13 @@ parse_fieldlist_spec(module_t* module, ast_node_t* parent, token_t* token)
 
   do {
     ntokens++;
-    ntokens += parse_expression(module, node_statement, &token[ntokens]) - 1;
+
+    if (token[ntokens].type == TK_CLOSE_BRACES) {
+      break;
+    }
+
+    ntokens += parse_expression(module, node_statement, &token[ntokens]);
   } while (token[ntokens].type == TK_COMMA);
 
-  return ntokens;
+  return ntokens + 1;
 }

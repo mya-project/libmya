@@ -57,6 +57,7 @@ const char* mya_token_types[] = {
 const char* mya_node_types[] = {
   [NT_ARG_LIST] = "argument_list",
   // clang-format hates me.
+  [NT_ARG] = "argument",
   [NT_BITFIELD_BODY] = "bitfield_body",
   [NT_BITFIELD_SPEC] = "bitfield_spec",
   [NT_EXPRESSION] = "expression",

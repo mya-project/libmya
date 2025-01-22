@@ -65,6 +65,18 @@ unsigned int
 parse_statement_register(module_t* module, ast_node_t* parent, token_t* token);
 
 /**
+ * Parse a inst statement adding it as a children on `parent` AST node.
+ *
+ * @param module  The module where the AST is.
+ * @param parent  The AST node parent for the statement.
+ * @param token   The token where to start parsing the statement.
+ *
+ * @return  The number of tokens used on the statement.
+ */
+unsigned int
+parse_statement_inst(module_t* module, ast_node_t* parent, token_t* token);
+
+/**
  * Parse a mathematical expression adding it as a children on `parent` AST node.
  *
  * @param module  The module where the AST is.

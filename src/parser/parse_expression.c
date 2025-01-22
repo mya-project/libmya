@@ -22,6 +22,10 @@ parse_expression(module_t* module, ast_node_t* parent, token_t* token)
   ast_node_t* child;
   unsigned int ntokens = 0;
 
+  if (token->type == TK_IDENTIFIER && token[1].type == TK_OPEN_BRACES) {
+    return parse_bitfield_spec(module, parent, token);
+  }
+
   stack_init(&stack);
 
   for (;;) {
@@ -30,7 +34,7 @@ parse_expression(module_t* module, ast_node_t* parent, token_t* token)
     switch (current_token->type) {
     case TK_OPEN_PARENS:
       child = stack_push(&stack, NT_EXPRESSION, current_token);
-      ntokens += parse_expression(module, child, token + 1);
+      ntokens += 1 + parse_expression(module, child, current_token + 1);
 
       if (token[ntokens].type != TK_CLOSE_PARENS) {
         module_add_error(
@@ -58,7 +62,6 @@ parse_expression(module_t* module, ast_node_t* parent, token_t* token)
       ntokens += _parse_binary_operator(module, parent, &stack, current_token);
       break;
     case TK_SEMICOLON:
-      ntokens++;
     case TK_CLOSE_PARENS:
     case TK_CLOSE_BRACES:
     case TK_CLOSE_BRACKET:
@@ -101,12 +104,12 @@ finish_expression:
       "Unexpected expression starting here."
     );
 
-    return ntokens + 1;
+    return ntokens;
   }
 
   ast_insert_children(parent, &node);
 
-  return ntokens + 1;
+  return ntokens;
 }
 
 static unsigned int
@@ -161,7 +164,7 @@ _parse_binary_operator(module_t* module, ast_node_t* parent, stack_t* stack, tok
   ast_node_t* op = stack_push(stack, NT_EXPRESSION, token);
   ast_insert_children(op, &value1);
 
-  return parse_expression(module, op, token + 1);
+  return 1 + parse_expression(module, op, token + 1);
 }
 
 static unsigned int
@@ -169,5 +172,5 @@ _parse_unary_operator(module_t* module, ast_node_t* parent, stack_t* stack, toke
 {
   ast_node_t* op = stack_push(stack, NT_EXPRESSION, token);
 
-  return parse_expression(module, op, token + 1);
+  return 1 + parse_expression(module, op, token + 1);
 }
