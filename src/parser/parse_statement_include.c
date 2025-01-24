@@ -18,7 +18,7 @@ parse_statement_include(module_t* module, ast_node_t* parent, token_t* token)
       "Expected literal string here. Example: include \"module.mya\";"
     );
 
-    return 2 + (tksemicolon->type == TK_SEMICOLON);
+    return 1;
   }
 
   if (tksemicolon->type != TK_SEMICOLON) {
@@ -33,5 +33,5 @@ parse_statement_include(module_t* module, ast_node_t* parent, token_t* token)
 
   ast_add_children(node_statement, NT_STRING, tkstring);
 
-  return 3;
+  return 2 + (tksemicolon->type == TK_SEMICOLON);
 }

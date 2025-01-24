@@ -1,4 +1,5 @@
 #include "ast.h"
+#include "macro_utils.h"
 #include "module.h"
 #include "parser.h"
 
@@ -42,8 +43,10 @@ _parse_bitfield_body(module_t* module, ast_node_t* parent, token_t* token)
   unsigned int ntokens = 0;
   token_t* current;
   ast_node_t* field;
+  unsigned int nerrors;
 
   for (;;) {
+    nerrors = module->errors_count;
     current = &token[ntokens];
 
     switch (current->type) {
@@ -69,6 +72,10 @@ _parse_bitfield_body(module_t* module, ast_node_t* parent, token_t* token)
 
       ntokens++;
       break;
+    }
+
+    if (module->errors_count > nerrors) {
+      return ntokens + parse_advance(&token[ntokens], ARR_TT(TK_CLOSE_BRACES));
     }
   }
 

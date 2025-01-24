@@ -1,8 +1,11 @@
 #include <stdlib.h>
 
 #include "ast.h"
+#include "debug.h"
+#include "macro_utils.h"
 #include "mya.h"
 #include "parser.h"
+#include "types/keywords.h"
 #include "types/token.h"
 
 error_code_t
@@ -15,7 +18,16 @@ mya_parser(module_t* module)
 
     switch (token->type) {
     case TK_KEYWORD:
+      DPRINTF2(
+        "Parsing statement: %s at %s:%d:%d.\n",
+        token->lexeme.data,
+        module->filepath,
+        token->line,
+        token->column
+      );
+
       tk_index += parse_statement(module, &module->ast, token);
+      tk_index += parse_advance(&module->tokens[tk_index], ARR_TT(TK_KEYWORD));
       break;
     case TK_EOF:
       goto finish;

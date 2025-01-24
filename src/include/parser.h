@@ -127,3 +127,16 @@ parse_bitfield_spec(module_t* module, ast_node_t* parent, token_t* token);
  */
 unsigned int
 parse_fieldlist_spec(module_t* module, ast_node_t* parent, token_t* token);
+
+/**
+ * Finds the next token TK_EOF or any of the specified types and then returns the number of tokens traveled.
+ *
+ * This function could be used to skip wrong tokens when a error as found on parsing a statement. So it's avoid a lot of
+ * useless error messages.
+ *
+ * @param token   Pointer for the first token where to start searching.
+ * @param types   Array of token types to search.
+ * @param ntypes  Size of `types` array.
+ */
+unsigned int
+parse_advance(token_t* token, token_type_t* types, size_t ntypes);

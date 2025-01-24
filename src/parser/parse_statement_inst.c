@@ -1,4 +1,5 @@
 #include "ast.h"
+#include "macro_utils.h"
 #include "module.h"
 #include "parser.h"
 #include "types/keywords.h"
@@ -48,6 +49,21 @@ parse_statement_inst(module_t* module, ast_node_t* parent, token_t* token)
   }
 
   ntokens += _parse_inst_args(module, node_statement, tkopen_parens);
+
+  token_t* tkopen_braces = token + ntokens;
+  if (tkopen_braces->type != TK_OPEN_BRACES) {
+    module_add_error(
+      module,
+      tkopen_braces->line,
+      tkopen_braces->column,
+      tkopen_braces->lexeme.length,
+      "Expected an open braces at start of the body of the instruction. Example: inst mov[16](arg1: register[32], "
+      "arg2: immediate[8]) { ... }"
+    );
+
+    return ntokens;
+  }
+
   ntokens += parse_fieldlist_spec(module, node_statement, token + ntokens);
 
   return ntokens;
@@ -66,6 +82,18 @@ _parse_inst_args(module_t* module, ast_node_t* parent, token_t* token)
     switch (current->type) {
     case TK_IDENTIFIER:
       ntokens += _parse_arg_spec(module, node_statement, current);
+
+      if (token[ntokens].type != TK_COMMA && token[ntokens].type != TK_CLOSE_PARENS) {
+        module_add_error(
+          module,
+          token[ntokens].line,
+          token[ntokens].column,
+          token[ntokens].lexeme.length,
+          "Expected a comma after the argument specification. Example: inst mov[16](arg1: register[32], arg2: "
+          "immediate[8]) { ... }"
+        );
+      }
+
       break;
     case TK_COMMA:
       ntokens++;
@@ -83,7 +111,7 @@ _parse_inst_args(module_t* module, ast_node_t* parent, token_t* token)
         "immediate[8]) { ... }"
       );
 
-      ntokens++;
+      ntokens += parse_advance(current + 1, ARR_TT(TK_COMMA, TK_OPEN_BRACES, TK_CLOSE_BRACES));
       goto finish;
     }
   }

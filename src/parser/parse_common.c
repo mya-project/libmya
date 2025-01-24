@@ -120,3 +120,21 @@ parse_fieldlist_spec(module_t* module, ast_node_t* parent, token_t* token)
 
   return ntokens + 1;
 }
+
+unsigned int
+parse_advance(token_t* token, token_type_t* types, size_t ntypes)
+{
+  int ntokens = 0;
+
+  while (token[ntokens].type != TK_EOF) {
+    for (int i = 0; i < ntypes; i++) {
+      if (token[ntokens].type == types[i]) {
+        return ntokens;
+      }
+    }
+
+    ntokens++;
+  }
+
+  return ntokens;
+}
