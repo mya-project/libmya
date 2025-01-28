@@ -2,10 +2,11 @@
 
 #include "types/ast.h"
 #include "types/keywords.h"
+#include "types/mya.h"
 #include "types/operators.h"
 #include "version.h"
 
-const char* mya_version = VERSION;
+const char* mya_version = LIBMYA_VERSION;
 
 const char* mya_keywords[] = {
   [KEY_BITFIELD] = "bitfield",

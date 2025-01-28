@@ -38,7 +38,7 @@ function update_version_file() {
 function update_header() {
     local version="${1?}"
 
-    sed -Ei "s/VERSION\s+\"[^\"]+\"/VERSION \"$version\"/" "$HEADER_FILE"
+    sed -Ei "s/LIBMYA_VERSION\s+\"[^\"]+\"/LIBMYA_VERSION \"$version\"/" "$HEADER_FILE"
 }
 
 function update_doxyfile() {
