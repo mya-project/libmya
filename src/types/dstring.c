@@ -11,12 +11,16 @@ dstring_init(dstring_t* string, unsigned int buffer_size)
 {
   string->length = 0;
   string->_buffer_size = buffer_size;
-  string->data = malloc(buffer_size);
+  string->data = (buffer_size == 0) ? NULL : malloc(buffer_size);
 }
 
 void
 dstring_close(dstring_t* string)
 {
+  if (! string->data) {
+    return;
+  }
+
   free(string->data);
   string->data = NULL;
 }
