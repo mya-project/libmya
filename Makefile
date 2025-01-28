@@ -50,9 +50,11 @@ clean:
 .PHONY: test-all
 test-all: $(TESTBINLIST)
 
-test_%: CLFAGS += -I "$(TESTDIR)/include"
+test_%: CLFAGS += -g3 -fsanitize=address -I "$(TESTDIR)/include"
 test_%: $(TESTOBJ) create_bin_dirs $(OBJLIST)
 	$(eval TEST_MODULE = $(shell find $(TESTDIR) -name "$@.c"))
+
+	@[ -z "$(TEST_MODULE)" ] && echo "Test module '$@.c' not found!" >&2 && exit 1 || exit 0
 
 	@echo
 	@echo "$(TEST_MODULE) -> $(BINBASEDIR)/$@"
