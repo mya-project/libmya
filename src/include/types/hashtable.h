@@ -1,7 +1,12 @@
 #pragma once
 
-#include "types/dstring.h"
+#include <stdbool.h>
 #include <stdint.h>
+
+#include "types/dstring.h"
+
+/// The number of collisions items to (re)alloc when a collision occurs.
+#define HASHTABLE_COLLISION_CHUNK_SIZE 5
 
 typedef uint64_t hash_t;
 
@@ -10,6 +15,7 @@ typedef uint64_t hash_t;
  */
 typedef struct hashitem
 {
+  bool is_set;                      ///< Is true if this item has set.
   dstring_t key;                    ///< The item's key.
   int64_t value;                    ///< The value of the item.
   struct hashitem* _collisions;     ///< List of another items with hash colliding with this. Is NULL if doesn't
@@ -23,7 +29,6 @@ typedef struct hashitem
  */
 typedef struct hashtable
 {
-  hashitem_t* items;    ///< List of items on the hashtable.
-  unsigned int length;  ///< Number of items on the list.
-  unsigned int _size;   ///< The number of item slots of the `items` allocated memory.
+  hashitem_t* items;   ///< List of items on the hashtable.
+  unsigned int _size;  ///< The number of item slots of the `items` allocated memory.
 } hashtable_t;
