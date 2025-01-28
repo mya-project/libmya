@@ -1,4 +1,5 @@
 #include "ast.h"
+#include "dstring.h"
 #include "token.h"
 #include "unity.h"
 
@@ -19,6 +20,7 @@ test_ast_node_init(void)
   TEST_ASSERT_EQUAL(AST_INITIAL_CHILDREN_LENGTH, node._children_length);
 
   ast_close(&node);
+  token_close(&token);
 }
 
 void
@@ -44,6 +46,8 @@ test_ast_add_children(void)
     TEST_ASSERT_EQUAL(&child_token, root.children[i].token);
   }
 
+  token_close(&root_token);
+  token_close(&child_token);
   ast_close(&root);
 }
 
@@ -72,6 +76,8 @@ test_ast_insert_children(void)
     TEST_ASSERT_EQUAL(&child_token, root.children[i].token);
   }
 
+  token_close(&root_token);
+  token_close(&child_token);
   ast_close(&root);
 }
 
@@ -89,6 +95,8 @@ test_ast_copy(void)
   ast_copy(&destiny, &source);
 
   TEST_ASSERT_EQUAL_MEMORY(&source, &destiny, sizeof(ast_node_t));
+
+  ast_close(&destiny);
 }
 
 /////

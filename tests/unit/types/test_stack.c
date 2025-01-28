@@ -38,6 +38,8 @@ test_stack_push_and_pop(void)
     TEST_ASSERT_EQUAL(i - 1, stack.length);
     TEST_ASSERT_EQUAL(NT_EXPRESSION, pop_node.type);
     TEST_ASSERT_EQUAL(token + i - 1, pop_node.token);
+
+    ast_close(&pop_node);
   }
 
   TEST_ASSERT_EQUAL(0, stack.length);
@@ -79,6 +81,7 @@ test_stack_insert(void)
 
   TEST_ASSERT_EQUAL(ERR_EMPTY, stack_pop(&stack, &pop_node));
 
+  ast_close(&insert_node);
   stack_close(&stack);
 }
 
@@ -91,13 +94,19 @@ test_stack_isempty(void)
   ast_node_t pop_node;
 
   TEST_ASSERT_TRUE(stack_isempty(&stack));
+
   stack_push(&stack, NT_EXPRESSION, NULL);
   stack_push(&stack, NT_EXPRESSION, NULL);
+
   TEST_ASSERT_FALSE(stack_isempty(&stack));
+
   stack_pop(&stack, &pop_node);
   TEST_ASSERT_FALSE(stack_isempty(&stack));
+  ast_close(&pop_node);
+
   stack_pop(&stack, &pop_node);
   TEST_ASSERT_TRUE(stack_isempty(&stack));
+  ast_close(&pop_node);
 
   stack_close(&stack);
 }

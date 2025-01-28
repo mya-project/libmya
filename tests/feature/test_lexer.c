@@ -59,6 +59,8 @@ test_lexer_with_math_expression(void)
   _assert_token(module, TK_NUMBER, "9", 9, 1, 75);
 
   _assert_token(module, TK_EOF, ":EOF:", 0, 2, 1);
+
+  module_close(&module);
 }
 
 void
@@ -124,6 +126,8 @@ test_lexer_with_basic_module(void)
   _assert_token(module, TK_CLOSE_BRACES, "}", 0, 7, 29);
 
   _assert_token(module, TK_EOF, ":EOF:", 0, 10, 1);
+
+  module_close(&module);
 }
 
 void
@@ -236,6 +240,8 @@ test_lexer_with_instructions_module(void)
   _assert_token(module, TK_CLOSE_BRACES, "}", 0, 19, 1);
 
   _assert_token(module, TK_EOF, ":EOF:", 0, 20, 1);
+
+  module_close(&module);
 }
 
 /////

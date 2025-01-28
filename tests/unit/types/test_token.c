@@ -13,6 +13,8 @@ test_token_init(void)
   TEST_ASSERT_EQUAL(2, token.line);
   TEST_ASSERT_EQUAL(3, token.column);
   TEST_ASSERT_EQUAL_STRING("any_token", token.lexeme.data);
+
+  token_close(&token);
 }
 
 void
@@ -28,6 +30,8 @@ test_token_init_with_a_very_big_lexeme(void)
 
   TEST_ASSERT_EQUAL_INT(1000, token.lexeme.length);
   TEST_ASSERT_EQUAL_STRING(big, token.lexeme.data);
+
+  token_close(&token);
 }
 
 /////

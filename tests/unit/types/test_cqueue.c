@@ -127,6 +127,8 @@ test_cqueue_isempty(void)
 
   TEST_ASSERT_EQUAL(ERR_OK, cqueue_get(&queue, &value));
   TEST_ASSERT_TRUE(cqueue_isempty(&queue));
+
+  cqueue_close(&queue);
 }
 
 void
