@@ -8,7 +8,7 @@
  * The dynamic string automatically realloc her buffer when needed. So you don't need to care about buffer sizes.
  *
  * @param string       Pointer for the dstring to be initialized.
- * @param buffer_size  The initial buffer size for the string.
+ * @param buffer_size  The initial buffer size for the string. If zero, doesn't allocate memory until required.
  */
 void
 dstring_init(dstring_t* string, unsigned int buffer_size);

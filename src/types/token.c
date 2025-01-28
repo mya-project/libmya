@@ -11,6 +11,12 @@ token_init(token_t* token, const char* lexeme, token_type_t type, unsigned int l
   token->column = column;
   token->value = 0;
 
-  dstring_init(&token->lexeme, 25);  // 25 is big enough to fit the major of the tokens.
+  dstring_init(&token->lexeme, 0);
   dstring_copy(&token->lexeme, lexeme);
+}
+
+void
+token_close(token_t* token)
+{
+  dstring_close(&token->lexeme);
 }

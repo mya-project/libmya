@@ -13,3 +13,11 @@
  */
 void
 token_init(token_t* token, const char* lexeme, token_type_t type, unsigned int line, unsigned int column);
+
+/**
+ * Closes the given token.
+ *
+ * @param token  The token to be closed.
+ */
+void
+token_close(token_t* token);

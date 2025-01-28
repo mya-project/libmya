@@ -88,6 +88,7 @@ finish_expression:
 
   if (stack_isempty(&stack)) {
     module_add_error(module, token->line, token->column, token->lexeme.length, "Malformed expression starting here.");
+    stack_close(&stack);
     return ntokens;
   }
 
@@ -104,11 +105,12 @@ finish_expression:
       "Unexpected expression starting here."
     );
 
+    stack_close(&stack);
     return ntokens;
   }
 
   ast_insert_children(parent, &node);
-
+  stack_close(&stack);
   return ntokens;
 }
 

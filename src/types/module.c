@@ -8,6 +8,7 @@
 #include "error_handling.h"
 #include "module.h"
 #include "queue.h"
+#include "token.h"
 #include "types/token.h"
 
 static inline void
@@ -72,6 +73,10 @@ module_close(module_t* module)
 {
   fclose(module->file);
   module->file = NULL;
+
+  for (int i = 0; i < module->tokens_count; i++) {
+    token_close(&module->tokens[i]);
+  }
 
   free(module->tokens);
   module->tokens = NULL;
