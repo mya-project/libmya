@@ -2,7 +2,7 @@
 
 #include "types/ast.h"
 #include "types/keywords.h"
-#include "types/mya.h"
+#include "types/mir.h"
 #include "types/operators.h"
 #include "version.h"
 
@@ -31,6 +31,13 @@ const char* mya_operators[] = {
   [OP_SHIFT_LEFT] = "<<",
   [OP_SHIFT_RIGHT] = ">>",
   [OP_XOR] = "^",
+  NULL,
+};
+
+const char* mya_types[] = {
+  [TYPE_IMMEDIATE] = "immediate",
+  // clang-format hates me.
+  [TYPE_REGISTER] = "register",
   NULL,
 };
 
