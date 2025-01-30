@@ -26,8 +26,13 @@ typedef enum mir_type
 typedef enum mir_bitfield_spec_type
 {
   FT_FIELDS,      ///< Bitfied spec value has a body with a list of fields. Example: Opcode{ opcode = 0x1, reg = arg1 }
+                  ///< On this type, `spec` is the used value with a list of bitfield spec's fields.
   FT_IDENTIFIER,  ///< Bitfield spec value is a identifier. Example: Reg{arg2}
+                  ///< On this type, `identifier` is the used value.
   FT_LITERAL,     ///< Bitfield spec value is a literal value. Example: Reg{4}
+                  ///< On this type, `value` is the used value.
+  FT_SPEC,        ///< Bitfield spec value is a bitfield spec. Example: reg = Reg{2}
+                  ///< On this type, `spec` is the used value with an unique bitfield spec.
 } mir_bitfield_spec_type_t;
 
 /**

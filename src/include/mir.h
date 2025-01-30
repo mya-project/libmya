@@ -207,6 +207,22 @@ mir_bitfield_spec_t*
 mir_bitfield_spec_add_field(mir_bitfield_spec_t* spec, const char* name, mir_bitfield_spec_type_t type);
 
 /**
+ * Set the bitfield spec's sub bitfield spec. This function is used to set types FT_SPEC, when the bitfield spec value
+ * is another bitfield spec. Example:
+ *   a = Reg{2}
+ *
+ * When `a = Reg{2}` itself is a bitfield spec, and `Reg{2}` is it's value (another bitfield spec).
+ *
+ * @param spec  The bitfield spec where to set the sub bitfield spec.
+ * @param name  Name of the sub bitfield spec.
+ * @param type  Type of the sub bitfield spec.
+ *
+ * @return  Pointer for the sub bitfield spec.
+ */
+mir_bitfield_spec_t*
+mir_bitfield_spec_set_spec(mir_bitfield_spec_t* spec, const char* name, mir_bitfield_spec_type_t type);
+
+/**
  * Get a bitfield spec's field from the given bitfield spec.
  *
  * @param spec  The bitfield spec where to get the field.

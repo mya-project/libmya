@@ -147,6 +147,8 @@ mir_add_register(mir_t* mir, const char* name, uint32_t size)
   reg->spec.spec = NULL;
   reg->spec.spec_length = 0;
   reg->spec._spec_size = 0;
+  dstring_init(&reg->spec.name, 0);
+  dstring_init(&reg->spec.identifier, 0);
   dstring_init(&reg->name, 0);
   dstring_copy(&reg->name, name);
 
@@ -260,6 +262,7 @@ mir_instruction_add_field(mir_inst_t* inst, const char* name, mir_bitfield_spec_
   field->spec = NULL;
   field->spec_length = 0;
   field->_spec_size = 0;
+  dstring_init(&field->identifier, 0);
   dstring_init(&field->name, 0);
   dstring_copy(&field->name, name);
 
@@ -290,6 +293,11 @@ mir_instruction_close(mir_inst_t* inst)
   for (int i = 0; i < inst->fields_length; i++) {
     mir_bitfield_spec_close(&inst->fields[i]);
   }
+
+  free(inst->parameters);
+  free(inst->fields);
+  inst->parameters = NULL;
+  inst->fields = NULL;
 }
 
 mir_bitfield_spec_t*
@@ -304,10 +312,32 @@ mir_bitfield_spec_add_field(mir_bitfield_spec_t* spec, const char* name, mir_bit
 
   field = &spec->spec[spec->spec_length++];
   field->type = type;
+  field->spec = NULL;
+  field->spec_length = 0;
+  field->_spec_size = 0;
+  dstring_init(&field->identifier, 0);
   dstring_init(&field->name, 0);
   dstring_copy(&field->name, name);
 
   return field;
+}
+
+mir_bitfield_spec_t*
+mir_bitfield_spec_set_spec(mir_bitfield_spec_t* spec, const char* name, mir_bitfield_spec_type_t type)
+{
+  spec->spec = malloc(sizeof(mir_bitfield_spec_t));
+  spec->spec_length = 1;
+  spec->_spec_size = 1;
+
+  spec->spec->type = type;
+  spec->spec->spec = NULL;
+  spec->spec->spec_length = 0;
+  spec->spec->_spec_size = 0;
+  dstring_init(&spec->spec->identifier, 0);
+  dstring_init(&spec->spec->name, 0);
+  dstring_copy(&spec->spec->name, name);
+
+  return spec->spec;
 }
 
 mir_bitfield_spec_t*
