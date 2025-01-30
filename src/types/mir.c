@@ -29,7 +29,29 @@ mir_init(mir_t* mir)
 void
 mir_close(mir_t* mir)
 {
-  //
+  for (int i = 0; i < mir->bitfields_length; i++) {
+    mir_bitfield_close(&mir->bitfields[i]);
+  }
+
+  for (int i = 0; i < mir->registers_length; i++) {
+    mir_register_close(&mir->registers[i]);
+  }
+
+  for (int i = 0; i < mir->instructions_length; i++) {
+    mir_instruction_close(&mir->instructions[i]);
+  }
+
+  free(mir->bitfields);
+  free(mir->registers);
+  free(mir->instructions);
+  mir->bitfields = NULL;
+  mir->registers = NULL;
+  mir->instructions = NULL;
+
+  hashtable_close(&mir->variables);
+  hashtable_close(&mir->_bitfields_index);
+  hashtable_close(&mir->_registers_index);
+  hashtable_close(&mir->_instructions_index);
 }
 
 mir_bitfield_t*
@@ -122,6 +144,9 @@ mir_add_register(mir_t* mir, const char* name, uint32_t size)
 
   reg = &mir->registers[mir->registers_length];
   reg->size = size;
+  reg->spec.spec = NULL;
+  reg->spec.spec_length = 0;
+  reg->spec._spec_size = 0;
   dstring_init(&reg->name, 0);
   dstring_copy(&reg->name, name);
 
@@ -143,6 +168,13 @@ mir_get_register(mir_t* mir, const char* name)
   return &mir->registers[index];
 }
 
+void
+mir_register_close(mir_register_t* reg)
+{
+  dstring_close(&reg->name);
+  mir_bitfield_spec_close(&reg->spec);
+}
+
 mir_inst_t*
 mir_add_instruction(mir_t* mir, const char* name, uint32_t size)
 {
@@ -155,6 +187,12 @@ mir_add_instruction(mir_t* mir, const char* name, uint32_t size)
 
   inst = &mir->instructions[mir->instructions_length];
   inst->size = size;
+  inst->fields = NULL;
+  inst->fields_length = 0;
+  inst->_fields_size = 0;
+  inst->parameters = NULL;
+  inst->parameters_length = 0;
+  inst->_parameters_size = 0;
   dstring_init(&inst->name, 0);
   dstring_copy(&inst->name, name);
 
@@ -219,6 +257,9 @@ mir_instruction_add_field(mir_inst_t* inst, const char* name, mir_bitfield_spec_
 
   field = &inst->fields[inst->fields_length++];
   field->type = type;
+  field->spec = NULL;
+  field->spec_length = 0;
+  field->_spec_size = 0;
   dstring_init(&field->name, 0);
   dstring_copy(&field->name, name);
 
@@ -235,6 +276,20 @@ mir_instruction_get_field(mir_inst_t* inst, const char* name)
   }
 
   return NULL;
+}
+
+void
+mir_instruction_close(mir_inst_t* inst)
+{
+  dstring_close(&inst->name);
+
+  for (int i = 0; i < inst->parameters_length; i++) {
+    dstring_close(&inst->parameters[i].name);
+  }
+
+  for (int i = 0; i < inst->fields_length; i++) {
+    mir_bitfield_spec_close(&inst->fields[i]);
+  }
 }
 
 mir_bitfield_spec_t*
@@ -265,4 +320,20 @@ mir_bitfield_spec_get_field(mir_bitfield_spec_t* spec, const char* name)
   }
 
   return NULL;
+}
+
+void
+mir_bitfield_spec_close(mir_bitfield_spec_t* spec)
+{
+  dstring_close(&spec->name);
+  dstring_close(&spec->identifier);
+
+  for (int i = 0; i < spec->spec_length; i++) {
+    mir_bitfield_spec_close(&spec->spec[i]);
+  }
+
+  if (spec->spec_length > 0 && spec->spec != NULL) {
+    free(spec->spec);
+    spec->spec = NULL;
+  }
 }

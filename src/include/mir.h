@@ -1,3 +1,5 @@
+#pragma once
+
 #include "types/mir.h"
 
 /**
@@ -97,6 +99,14 @@ mir_register_t*
 mir_get_register(mir_t* mir, const char* name);
 
 /**
+ * Closes the given register.
+ *
+ * @param reg  The register to be closed.
+ */
+void
+mir_register_close(mir_register_t* reg);
+
+/**
  * Add a new instruction declaration to MIR.
  *
  * @param mir   The MIR where to add the instruction.
@@ -170,6 +180,14 @@ mir_bitfield_spec_t*
 mir_instruction_get_field(mir_inst_t* inst, const char* name);
 
 /**
+ * Closes the given instruction.
+ *
+ * @param inst  Instruction to be closed.
+ */
+void
+mir_instruction_close(mir_inst_t* inst);
+
+/**
  * Add a new bitfield spec's field to the given bitfield spec. It's used on bitfield specs with fields.
  * Example:
  *   Opcode {
@@ -199,3 +217,11 @@ mir_bitfield_spec_add_field(mir_bitfield_spec_t* spec, const char* name, mir_bit
  */
 mir_bitfield_spec_t*
 mir_bitfield_spec_get_field(mir_bitfield_spec_t* spec, const char* name);
+
+/**
+ * Closes the given bitfield spec.
+ *
+ * @param spec  The bitfield spec to be closed.
+ */
+void
+mir_bitfield_spec_close(mir_bitfield_spec_t* spec);
