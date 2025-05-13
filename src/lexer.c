@@ -4,10 +4,10 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "cqueue.h"
 #include "debug.h"
 #include "dstring.h"
 #include "module.h"
-#include "queue.h"
 #include "token.h"
 #include "types/err.h"
 #include "types/keywords.h"

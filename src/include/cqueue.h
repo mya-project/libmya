@@ -1,7 +1,7 @@
 #pragma once
 
+#include "types/cqueue.h"
 #include "types/err.h"
-#include "types/queue.h"
 
 /**
  * Initializes a circular queue.

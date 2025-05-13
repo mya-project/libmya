@@ -3,8 +3,8 @@
 #include <stdio.h>
 
 #include "types/ast.h"
+#include "types/cqueue.h"
 #include "types/dstring.h"
-#include "types/queue.h"
 #include "types/token.h"
 
 #define MODULE_MAX_FILEPATH_SIZE       127

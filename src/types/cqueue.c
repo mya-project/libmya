@@ -1,6 +1,6 @@
 #include <stdlib.h>
 
-#include "queue.h"
+#include "cqueue.h"
 #include "types/err.h"
 
 #define MIN(a, b) (a < b ? a : b)

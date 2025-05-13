@@ -3,11 +3,11 @@
 #include <string.h>
 
 #include "ast.h"
+#include "cqueue.h"
 #include "debug.h"
 #include "dstring.h"
 #include "error_handling.h"
 #include "module.h"
-#include "queue.h"
 #include "token.h"
 #include "types/token.h"
 

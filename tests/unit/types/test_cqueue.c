@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "queue.h"
+#include "cqueue.h"
 #include "types/err.h"
 #include "unity.h"
 
@@ -47,7 +47,7 @@ test_cqueue_add(void)
   TEST_ASSERT_EQUAL(ERR_OK, cqueue_add(&queue, 4));
   TEST_ASSERT_EQUAL(ERR_OK, cqueue_add(&queue, 5));
 
-  TEST_ASSERT_EQUAL_INT_ARRAY(((int[]){ 1, 2, 3, 4, 5 }), queue.data, 5);
+  TEST_ASSERT_EQUAL_INT_ARRAY(((int[]) { 1, 2, 3, 4, 5 }), queue.data, 5);
   TEST_ASSERT_EQUAL(5, queue.length);
 
   TEST_ASSERT_EQUAL(ERR_MAX_SIZE_EXCEEDED, cqueue_add(&queue, 6));
