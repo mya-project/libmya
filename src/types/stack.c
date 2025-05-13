@@ -55,6 +55,16 @@ stack_pop(stack_t* stack, ast_node_t* value)
   return ERR_OK;
 }
 
+ast_node_t*
+stack_peek(stack_t* stack)
+{
+  if (stack_isempty(stack)) {
+    return NULL;
+  }
+
+  return &stack->values[stack->length - 1];
+}
+
 bool
 stack_isempty(stack_t* stack)
 {

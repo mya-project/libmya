@@ -57,6 +57,17 @@ error_code_t
 stack_pop(stack_t* stack, ast_node_t* value);
 
 /**
+ * Peeks the value on top of the stack without removing it.
+ *
+ * @param stack  The stack to peek into.
+ *
+ * @return  NULL if stack is empty.
+ * @return  Pointer to the top node in the stack.
+ */
+ast_node_t*
+stack_peek(stack_t* stack);
+
+/**
  * Check if the given stack is empty.
  *
  * @param stack  The stack to check.
