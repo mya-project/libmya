@@ -48,7 +48,7 @@ test_tkqueue_add(void)
 }
 
 void
-test_tkqueue_lookup(void)
+test_tkqueue_peek(void)
 {
   tkqueue_t queue;
   token_t tk_a;
@@ -56,20 +56,20 @@ test_tkqueue_lookup(void)
 
   tkqueue_init(&queue, 25);
 
-  TEST_ASSERT_NULL(tkqueue_lookup(&queue));
+  TEST_ASSERT_NULL(tkqueue_peek(&queue));
 
   tkqueue_add(&queue, &tk_a);
   tkqueue_add(&queue, &tk_b);
 
-  TEST_ASSERT_EQUAL_PTR(&tk_a, tkqueue_lookup(&queue));
-  TEST_ASSERT_EQUAL_PTR(&tk_a, tkqueue_lookup(&queue));
+  TEST_ASSERT_EQUAL_PTR(&tk_a, tkqueue_peek(&queue));
+  TEST_ASSERT_EQUAL_PTR(&tk_a, tkqueue_peek(&queue));
   TEST_ASSERT_EQUAL_PTR(&tk_a, tkqueue_get(&queue));
 
-  TEST_ASSERT_EQUAL_PTR(&tk_b, tkqueue_lookup(&queue));
-  TEST_ASSERT_EQUAL_PTR(&tk_b, tkqueue_lookup(&queue));
+  TEST_ASSERT_EQUAL_PTR(&tk_b, tkqueue_peek(&queue));
+  TEST_ASSERT_EQUAL_PTR(&tk_b, tkqueue_peek(&queue));
   TEST_ASSERT_EQUAL_PTR(&tk_b, tkqueue_get(&queue));
 
-  TEST_ASSERT_NULL(tkqueue_lookup(&queue));
+  TEST_ASSERT_NULL(tkqueue_peek(&queue));
 
   tkqueue_close(&queue);
 }
@@ -83,7 +83,7 @@ main(void)
 
   RUN_TEST(test_tkqueue_init);
   RUN_TEST(test_tkqueue_add);
-  RUN_TEST(test_tkqueue_lookup);
+  RUN_TEST(test_tkqueue_peek);
 
   return UNITY_END();
 }
