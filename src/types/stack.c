@@ -12,7 +12,7 @@ stack_init(stack_t* stack)
 {
   stack->length = 0;
 
-  stack->values = malloc(sizeof(ast_node_t) * STACK_INITIAL_LENGTH);
+  stack->values = malloc(sizeof(token_t*) * STACK_INITIAL_LENGTH);
   stack->_size = STACK_INITIAL_LENGTH;
 }
 
@@ -23,46 +23,32 @@ stack_close(stack_t* stack)
   stack->values = NULL;
 }
 
-ast_node_t*
-stack_push(stack_t* stack, node_type_t type, token_t* token)
+void
+stack_push(stack_t* stack, token_t* token)
 {
   _stack_ensure_size(stack);
 
-  ast_node_init(&stack->values[stack->length], NULL, type, token);
-
-  return &stack->values[stack->length++];
+  stack->values[stack->length++] = token;
 }
 
-ast_node_t*
-stack_insert(stack_t* stack, ast_node_t* source)
-{
-  _stack_ensure_size(stack);
-
-  ast_copy(&stack->values[stack->length], source);
-
-  return &stack->values[stack->length++];
-}
-
-error_code_t
-stack_pop(stack_t* stack, ast_node_t* value)
+token_t*
+stack_pop(stack_t* stack)
 {
   if (stack_isempty(stack)) {
-    return ERR_EMPTY;
+    return NULL;
   }
 
-  ast_copy(value, &stack->values[--stack->length]);
-
-  return ERR_OK;
+  return stack->values[--stack->length];
 }
 
-ast_node_t*
+token_t*
 stack_peek(stack_t* stack)
 {
   if (stack_isempty(stack)) {
     return NULL;
   }
 
-  return &stack->values[stack->length - 1];
+  return stack->values[stack->length - 1];
 }
 
 bool
@@ -79,5 +65,5 @@ _stack_ensure_size(stack_t* stack)
   }
 
   stack->_size += STACK_LENGTH_INCREMENT;
-  stack->values = realloc(stack->values, sizeof(ast_node_t) * stack->_size);
+  stack->values = realloc(stack->values, sizeof(token_t*) * stack->_size);
 }

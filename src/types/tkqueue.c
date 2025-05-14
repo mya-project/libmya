@@ -11,7 +11,7 @@ tkqueue_init(tkqueue_t* queue, unsigned int initial_size)
   queue->length = 0;
   queue->_current = 0;
   queue->_size = initial_size;
-  queue->data = malloc(sizeof(token_t) * initial_size);
+  queue->data = malloc(sizeof(token_t*) * initial_size);
 }
 
 void
@@ -39,7 +39,7 @@ tkqueue_get(tkqueue_t* queue)
 }
 
 token_t*
-tkqueue_lookup(const tkqueue_t* queue)
+tkqueue_peek(const tkqueue_t* queue)
 {
   if (tkqueue_isempty(queue)) {
     return NULL;
@@ -62,5 +62,5 @@ _queue_ensure_size(tkqueue_t* queue)
   }
 
   queue->_size += QUEUE_LENGTH_INCREMENT;
-  queue->data = realloc(queue->data, sizeof(token_t) * queue->_size);
+  queue->data = realloc(queue->data, sizeof(token_t*) * queue->_size);
 }

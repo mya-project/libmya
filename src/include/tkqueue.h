@@ -51,7 +51,7 @@ tkqueue_get(tkqueue_t* queue);
  * @return       Pointer to the item.
  */
 token_t*
-tkqueue_lookup(const tkqueue_t* queue);
+tkqueue_peek(const tkqueue_t* queue);
 
 /**
  * Check if the given queue is empty.
