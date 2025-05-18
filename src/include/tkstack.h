@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 #include "types/err.h"
-#include "types/stack.h"
+#include "types/tkstack.h"
 
 /**
  * Initializes the given stack.
@@ -11,7 +11,7 @@
  * @param stack  The stack to be initialized.
  */
 void
-stack_init(stack_t* stack);
+tkstack_init(tkstack_t* stack);
 
 /**
  * Closes the given stack.
@@ -19,7 +19,7 @@ stack_init(stack_t* stack);
  * @param stack  The stack to be closed.
  */
 void
-stack_close(stack_t* stack);
+tkstack_close(tkstack_t* stack);
 
 /**
  * Push a new value on the stack.
@@ -28,7 +28,7 @@ stack_close(stack_t* stack);
  * @param token  Pointer to a token to add on the stack.
  */
 void
-stack_push(stack_t* stack, token_t* token);
+tkstack_push(tkstack_t* stack, token_t* token);
 
 /**
  * Pop a value from the stack.
@@ -40,7 +40,7 @@ stack_push(stack_t* stack, token_t* token);
  * @return       Pointer to the item.
  */
 token_t*
-stack_pop(stack_t* stack);
+tkstack_pop(tkstack_t* stack);
 
 /**
  * Peeks the value on top of the stack without removing it.
@@ -51,7 +51,7 @@ stack_pop(stack_t* stack);
  * @return  Pointer to the top node in the stack.
  */
 token_t*
-stack_peek(stack_t* stack);
+tkstack_peek(tkstack_t* stack);
 
 /**
  * Check if the given stack is empty.
@@ -62,4 +62,4 @@ stack_peek(stack_t* stack);
  * @return  false if stack has values.
  */
 bool
-stack_isempty(stack_t* stack);
+tkstack_isempty(tkstack_t* stack);
