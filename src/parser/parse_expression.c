@@ -11,6 +11,9 @@
 static void
 _generate_ast(module_t* module, ast_node_t* parent, tkqueue_t* queue);
 
+static unsigned int
+_parse_bitfield_expression(module_t* module, ast_node_t* parent, tkqueue_t* queue, token_t* token);
+
 static int
 _op_precedence(token_t* token);
 
@@ -47,6 +50,8 @@ parse_expression(module_t* module, ast_node_t* parent, token_t* token)
       is_unary = false;
       break;
     case TK_EQUAL:
+      ntokens = _parse_bitfield_expression(module, parent, &queue, current_token);
+      goto clean_and_exit;
     case TK_OPERATOR:
       if (is_unary && current_token->value == OP_MINUS) {
         current_token->value = OP_NEGATE;
@@ -132,9 +137,6 @@ _generate_ast(module_t* module, ast_node_t* parent, tkqueue_t* queue)
   aststack_init(&stack);
 
   for (; (token = tkqueue_get(queue));) {
-    // printf("%s ", token->lexeme.data);
-    // continue;
-
     if (token->type != TK_OPERATOR) {
       aststack_push(&stack, NT_EXPRESSION, token);
       continue;
@@ -165,6 +167,29 @@ _generate_ast(module_t* module, ast_node_t* parent, tkqueue_t* queue)
 
 clean:
   aststack_close(&stack);
+}
+
+static unsigned int
+_parse_bitfield_expression(module_t* module, ast_node_t* parent, tkqueue_t* queue, token_t* token)
+{
+  token_t* ident = tkqueue_get(queue);
+
+  if (! ident || ident->type != TK_IDENTIFIER) {
+    module_add_error(
+      module,
+      token->line,
+      token->column,
+      token->lexeme.length,
+      "Bitfield expression expects a valid identifier before the `=`, like in: `some_identifier = Field { ... }`."
+    );
+
+    return 1;
+  };
+
+  ast_node_t* op = ast_add_children(parent, NT_EXPRESSION, token);
+  ast_add_children(op, NT_EXPRESSION, ident);
+
+  return 2 + parse_expression(module, op, token + 1);
 }
 
 static int

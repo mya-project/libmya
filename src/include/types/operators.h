@@ -6,6 +6,7 @@ typedef enum operator
   OP_DIV,
   OP_MINUS,
   OP_MULT,
+  OP_NEGATE,
   OP_NOT,
   OP_OR,
   OP_PLUS,
