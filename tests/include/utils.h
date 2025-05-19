@@ -3,6 +3,7 @@
 #define UTILS_BASEPATH           "tests/utils"
 #define FILE_BASIC_MODULE        UTILS_BASEPATH "/basic.mya"
 #define FILE_INSTRUCTIONS_MODULE UTILS_BASEPATH "/instructions.mya"
+#define FILE_SIMPLE_EXPRESSION   UTILS_BASEPATH "/simple_expression"
 #define FILE_EXPRESSION          UTILS_BASEPATH "/expression"
 #define FILE_BIG_PATH                                                                                                  \
   UTILS_BASEPATH                                                                                                       \

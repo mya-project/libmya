@@ -1,0 +1,85 @@
+{
+  "type": "root",
+  "children": [
+    {
+      "type": "expression",
+      "token": {
+        "lexeme": "+",
+        "type": "operator",
+        "line": 1,
+        "column": 11,
+        "value": 7
+      },
+      "children": [
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "+",
+            "type": "operator",
+            "line": 1,
+            "column": 3,
+            "value": 7
+          },
+          "children": [
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "1",
+                "type": "number",
+                "line": 1,
+                "column": 1,
+                "value": 1
+              },
+              "children": []
+            },
+            {
+              "type": "expression",
+              "token": {
+                "lexeme": "*",
+                "type": "operator",
+                "line": 1,
+                "column": 7,
+                "value": 3
+              },
+              "children": [
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "2",
+                    "type": "number",
+                    "line": 1,
+                    "column": 5,
+                    "value": 2
+                  },
+                  "children": []
+                },
+                {
+                  "type": "expression",
+                  "token": {
+                    "lexeme": "3",
+                    "type": "number",
+                    "line": 1,
+                    "column": 9,
+                    "value": 3
+                  },
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "expression",
+          "token": {
+            "lexeme": "4",
+            "type": "number",
+            "line": 1,
+            "column": 13,
+            "value": 4
+          },
+          "children": []
+        }
+      ]
+    }
+  ]
+}

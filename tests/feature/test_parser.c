@@ -15,6 +15,33 @@ void
 _assert_files(char* file1, char* file2);
 
 void
+test_parser_simple_expression(void)
+{
+  module_t module;
+  char tmpname[] = "/tmp/XXXXXX";
+
+  TEST_ASSERT_EQUAL(ERR_OK, module_init(&module, FILE_SIMPLE_EXPRESSION));
+  TEST_ASSERT_EQUAL(ERR_OK, mya_lexer(&module));
+
+  TEST_ASSERT_EQUAL(0, module.errors_count);
+  TEST_ASSERT_EQUAL(8, module.tokens_count);
+
+  parse_expression(&module, &module.ast, module.tokens);
+
+  TEST_ASSERT_EQUAL(0, module.errors_count);
+
+  int fd = mkstemp(tmpname);
+  FILE* tmp = fdopen(fd, "w");
+  ast_to_json(&module.ast, tmp);
+  fclose(tmp);
+
+  _assert_files(tmpname, FILE_SIMPLE_EXPRESSION ".json");
+
+  unlink(tmpname);
+  module_close(&module);
+}
+
+void
 test_parser_with_expression(void)
 {
   module_t module;
@@ -117,6 +144,7 @@ main(void)
 {
   UNITY_BEGIN();
 
+  RUN_TEST(test_parser_simple_expression);
   RUN_TEST(test_parser_with_expression);
   RUN_TEST(test_parser_with_basic_module);
   RUN_TEST(test_parser_with_instructions_module);
